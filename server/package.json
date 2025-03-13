@@ -1,0 +1,28 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Server side for EduTracker App",
+  "main": "server..js",
+  "scripts": {
+    "start": "node server.js",
+    "watch": "nodemon",
+    "seed": "node config/seeds.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Teacher2Coder/edtracker.git"
+  },
+  "author": "Teacher2Coder",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Teacher2Coder/edtracker/issues"
+  },
+  "homepage": "https://github.com/Teacher2Coder/edtracker#readme",
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.17.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  }
+}

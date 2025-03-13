@@ -1,0 +1,32 @@
+{
+  "name": "edtracker",
+  "version": "1.0.0",
+  "description": "Allows teachers and students to manage tasks and assignments",
+  "main": "server/server.js",
+  "scripts": {
+    "start": "node server/server.js",
+    "develop": "concurrently \"cd server && npm run watch\" \"cd client && npm run dev\"",
+    "install": "cd server && npm i && cd ../client && npm i",
+    "seed": "cd server && npm run seed",
+    "build": "cd client && npm run build",
+    "render-build": "npm install && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Teacher2Coder/edtracker.git"
+  },
+  "author": "Teacher2Coder",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Teacher2Coder/edtracker/issues"
+  },
+  "homepage": "https://github.com/Teacher2Coder/edtracker#readme",
+  "devDependencies": {
+    "concurrently": "^5.1.0"
+  },
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "kill-port": "^2.0.1",
+    "nes.css": "^2.2.1"
+  }
+}

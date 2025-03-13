@@ -1,0 +1,47 @@
+{
+  "name": "client",
+  "version": "1.0.0",
+  "description": "Client side of EdTracker App",
+  "main": "main.jsx",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview",
+    "test": "vitest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Teacher2Coder/edtracker.git"
+  },
+  "author": "Teacher2Coder",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Teacher2Coder/edtracker/issues"
+  },
+  "homepage": "https://github.com/Teacher2Coder/edtracker#readme",
+  "dependencies": {
+    "@apollo/client": "^3.7.15",
+    "@chakra-ui/react": "^3.2.3",
+    "@emotion/react": "^11.13.5",
+    "@testing-library/react": "^14.0.0",
+    "happy-dom": "^9.20.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-icons": "^5.4.0",
+    "react-router-dom": "^6.11.2",
+    "react-use": "^17.6.0",
+    "vitest": "^0.31.4"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.37",
+    "@types/react-dom": "^18.0.11",
+    "@vitejs/plugin-react": "^4.0.0",
+    "eslint": "^8.38.0",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.3.4",
+    "vite": "^4.4.5",
+    "vite-jsconfig-paths": "^2.0.1"
+  }
+}
