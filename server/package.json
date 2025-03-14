@@ -19,8 +19,11 @@
   },
   "homepage": "https://github.com/Teacher2Coder/edtracker#readme",
   "dependencies": {
+    "connect-session-sequelize": "^7.0.4",
     "dotenv": "^16.4.7",
-    "express": "^4.17.2"
+    "express": "^4.17.2",
+    "pg": "^8.11.3",
+    "sequelize": "^6.33.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.2"
