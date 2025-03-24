@@ -16,11 +16,11 @@ Student.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    name: {
+    studentName: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    email: {
+    studentEmail: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
@@ -28,13 +28,27 @@ Student.init(
         isEmail: true,
       },
     },
-    password: {
+    studentPassword: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
         len: [8],
       },
     },
+    classes: [{
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'class',
+        key: 'id'
+      }
+    }],
+    assignments: [{
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'assignments',
+        key: 'id'
+      }
+    }]
   },
   {
     hooks: {
@@ -47,7 +61,7 @@ Student.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'Student',
+    modelName: 'student',
   }
 );
 

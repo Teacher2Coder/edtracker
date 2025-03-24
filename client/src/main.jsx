@@ -12,6 +12,8 @@ import LoginStudent from './pages/LoginStudent.jsx';
 import LoginTeacher from './pages/LoginTeacher.jsx';
 import SignupStudent from './pages/SignupStudent.jsx';
 import SignupTeacher from './pages/SignupTeacher.jsx';
+import DashboardStudent from './pages/DashboardStudent.jsx';
+import DashboardTeacher from './pages/DashboardTeacher.jsx';
 
 // Create the browser router
 const router = createBrowserRouter([
@@ -40,12 +42,20 @@ const router = createBrowserRouter([
         path: '/teacher/signup',
         element: <SignupTeacher />
       },
+      {
+        path: '/student/dashboard',
+        element: <DashboardStudent />
+      },
+      {
+        path: '/teacher/dashboard',
+        element: <DashboardTeacher />
+      }
     ]
   }
-])
+]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider>
     <RouterProvider router={router} />
   </Provider>
-)
+);

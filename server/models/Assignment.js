@@ -11,29 +11,33 @@ Assignment.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    AssignmentName: {
+    assignmentName: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    AssignmentCode: {
+    description: {
+      type: DataTypes.TEXT,
+      allowNull: false
+    },
+    assignDate: {
+      type: DataTypes.DATE,
+      allowNull: false
+    },
+    dueDate: {
+      type: DataTypes.DATE,
+      allowNull: false
+    },
+    status: {
       type: DataTypes.STRING,
-      allowNull: false,
-      unique: true,
-    },
-    teacherId: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: 'teacher',
-        key: 'id',
-      },
-    },
+      allowNull: false
+    }
   },
   {
     sequelize,
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'Assignment',
+    modelName: 'assignment',
   }
 );
 

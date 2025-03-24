@@ -1,4 +1,5 @@
 import { Card, Field, Input, Heading, Button } from '@chakra-ui/react'
+import { Link } from 'react-router-dom'
 import { PasswordInput } from "../components/ui/password-input"
 
 const LoginStudent = () => {
@@ -24,8 +25,12 @@ const LoginStudent = () => {
               </Field.Root>
             </div>
           </Card.Body>
-          <Card.Footer>
+          <Card.Footer style={{ display: 'flex', flexDirection: 'column' }}>
             <Button colorPalette={'blue'} style={{margin: '0 auto'}}>Login</Button>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+              <Link to='/student/signup'>Don't have an account? Click here!</Link>
+              <Link to='/teacher/login'>Not a student? Click here</Link>
+            </div>
           </Card.Footer>
         </Card.Root>
       </div>

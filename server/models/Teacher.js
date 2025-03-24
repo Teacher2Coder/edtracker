@@ -16,11 +16,11 @@ Teacher.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    name: {
+    teacherName: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    email: {
+    teacherEmail: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
@@ -28,13 +28,20 @@ Teacher.init(
         isEmail: true,
       },
     },
-    password: {
+    teacherPassword: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
         len: [8],
       },
     },
+    classes: [{
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'class',
+        key: 'id'
+      }
+    }]
   },
   {
     hooks: {

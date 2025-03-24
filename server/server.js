@@ -1,4 +1,5 @@
 // Import the dependencies
+require('dotenv').config();
 const express = require('express');
 const { ApolloServer } = require('@apollo/server');
 const { expressMiddleware } = require('@apollo/server/express4');
@@ -39,6 +40,10 @@ const startApolloServer = async () => {
       res.sendFile(path.join(__dirname, '../client/build/index.html'));
     });
   }
+
+  console.log('DB Name: ', process.env.DB_NAME)
+  console.log('DB User: ', process.env.DB_USER)
+  console.log('DB Password: ', process.env.DB_PASSWORD)
 
   db.sync({ force: false }).then(() => {
     app.listen(PORT, () => {

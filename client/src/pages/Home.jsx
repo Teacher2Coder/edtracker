@@ -1,6 +1,8 @@
+// Import components
 import Portal from '../components/Portal';
 import { Heading } from '@chakra-ui/react'
 
+// Define Home function
 const Home = () => {
   return (
     <div className="home">
@@ -10,4 +12,5 @@ const Home = () => {
   );
 }
 
+// Export Home function
 export default Home;
