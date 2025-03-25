@@ -41,6 +41,13 @@ Teacher.init(
         model: 'class',
         key: 'id'
       }
+    }],
+    notifications: [{
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'notification',
+        key: 'id'
+      }
     }]
   },
   {

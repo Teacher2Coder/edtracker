@@ -12,7 +12,7 @@ const db = require('./config/connection');
 const PORT = process.env.PORT || 3001;
 const app = express();
 
-// Define Start Apollo Server
+// Define startApolloServer
 const startApolloServer = async () => {
   const server = new ApolloServer({
     typeDefs,
@@ -33,6 +33,7 @@ const startApolloServer = async () => {
     })
   );
 
+  // If in the production environment, serve the static files from the React app
   if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '../client/build')));
 
@@ -41,6 +42,7 @@ const startApolloServer = async () => {
     });
   }
 
+  // Log the database connection details
   console.log('DB Name: ', process.env.DB_NAME)
   console.log('DB User: ', process.env.DB_USER)
   console.log('DB Password: ', process.env.DB_PASSWORD)

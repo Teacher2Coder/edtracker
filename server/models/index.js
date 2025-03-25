@@ -3,6 +3,8 @@ const Teacher = require('./Teacher');
 const Student = require('./Student');
 const Class = require('./Class');
 const Assignment = require('./Assignment');
+const TeacherNotification = require('./TeacherNotification');
+const StudentNotification = require('./StudentNotification');
 
 // Class.belongsTo(Teacher, {
 //   foreignKey: 'teacher_id'
@@ -31,4 +33,11 @@ const Assignment = require('./Assignment');
 // })
 
 // Export the models
-module.exports = { Teacher, Student, Class, Assignment };
+module.exports = { 
+  Teacher,
+  Student,
+  Class,
+  Assignment,
+  TeacherNotification,
+  StudentNotification
+};

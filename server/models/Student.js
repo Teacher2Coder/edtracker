@@ -48,6 +48,13 @@ Student.init(
         model: 'assignments',
         key: 'id'
       }
+    }],
+    notifications: [{
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'notification',
+        key: 'id'
+      }
     }]
   },
   {

@@ -1,22 +1,36 @@
 // Import components
-import { Card, Heading, Button } from '@chakra-ui/react';
+import { Card, Heading, Button, Stack } from '@chakra-ui/react';
+import ClassCardTeacher from '../components/ClassCardTeacher';
 
+// Mock data for classes and students
 const classes = [
   {
     className: '1st Period Algebra',
+    students: [
+      { id: 1, name: 'John Doe', assignments: 5, ungraded:1, pastDue: 2 },
+      { id: 2, name: 'Jane Smith', assignments: 3, ungraded:2, pastDue: 1 },
+    ]
   },
   {
     className: '2nd Period Algebra',
+    students: [
+      { id: 1, name: 'Jack Bro', assignments: 4, ungraded:3, pastDue: 3 },
+      { id: 2, name: 'Mary Dary', assignments: 5, ungraded:1, pastDue: 1 },
+    ]
   },
   {
     className: '3rd Period Algebra',
+    students: [
+      { id: 1, name: 'Frank Moore', assignments: 6, ungraded:4, pastDue: 5 },
+      { id: 2, name: 'Jenny Goff', assignments: 2, ungraded:1, pastDue: 1 },
+    ]
   }
 ]
 
-const DashboardStudent = () => {
+const DashboardTeacher = () => {
   return (
     <div>
-      <div style={{width: '75%', margin: '0 auto', marginTop: '20px'}}>
+      <div style={{width: '75%', margin: '0 auto', marginTop: '40px'}}>
         <Card.Root>
           <Card.Header>
             <Card.Title>Welcome, user!</Card.Title>
@@ -35,22 +49,17 @@ const DashboardStudent = () => {
       </div>
       <div style={{width: '75%', margin: '0 auto', marginTop: '20px'}}>
         <Heading>Your classes:</Heading>
+        <Stack>
         {classes.map((cls) => (
-          <div key={cls.className} style={{marginTop: '10px'}}>
-            <Card.Root>
-              <Card.Header>
-                <Card.Title>{cls.className}</Card.Title>
-              </Card.Header>
-              <Card.Body>
-                List of students here
-              </Card.Body>
-            </Card.Root>
+          <div key={cls.className}>
+            <ClassCardTeacher cls={cls} />
           </div>
         ))}
+        </Stack>
       </div>
 
     </div>
   )
 }
 
-export default DashboardStudent;
+export default DashboardTeacher;
