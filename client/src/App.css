@@ -10,7 +10,7 @@
 .portal {
   width: 60%;
   margin: 0 auto;
-  margin-top: 8%;
+  margin-top: 20px;
 }
 
 .portal-button-div {
@@ -34,7 +34,6 @@
 .login-card {
   width: 50%;
   margin: 0 auto;
-  margin-top: 8%;
 }
 
 .login-form-control {

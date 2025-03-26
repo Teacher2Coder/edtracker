@@ -1,5 +1,5 @@
 // Import components
-import { Card, Field, Input, Heading, Button } from '@chakra-ui/react'
+import { Card, Field, Input, Heading, Button, Image } from '@chakra-ui/react'
 import { Link } from 'react-router-dom'
 import { PasswordInput } from "../../components/ui/password-input"
 
@@ -8,6 +8,13 @@ const SignupStudent = () => {
   return (
     <div className='login'>
       <Heading size={'6xl'}>Welcome to EduTracker</Heading>
+      <Image
+        src='/edutracker-logo.svg'
+        alt='EduTracker Logo'
+        boxSize='200px'
+        objectFit='cover'
+        margin={'0 auto'}
+      />
       <div className='login-card'>
         <Card.Root>
           <Card.Header>
@@ -46,7 +53,7 @@ const SignupStudent = () => {
             </div>
           </Card.Body>
           <Card.Footer style={{ display: 'flex', flexDirection: 'column' }}>
-            <Button colorPalette={'blue'} style={{margin: '0 auto'}}>Login</Button>
+            <Button colorPalette={'blue'} style={{margin: '0 auto'}}>Sign up!</Button>
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
               <Link to='/student/login'>Already have an account? Click here!</Link>
               <Link to='/teacher/signup'>Not a student? Click here</Link>

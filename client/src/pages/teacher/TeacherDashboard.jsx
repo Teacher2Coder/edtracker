@@ -1,7 +1,7 @@
 // Import components
 import { Card, Heading, Button, Stack } from '@chakra-ui/react';
-import Header from '../../components/TeacherHeader';
-import ClassCardTeacher from '../../components/ClassCardTeacher';
+import TeacherHeader from '../../components/teacher/TeacherHeader';
+import ClassCardTeacher from '../../components/teacher/TeacherClassCard';
 
 // Mock data for classes and students
 const classes = [
@@ -31,7 +31,7 @@ const classes = [
 const DashboardTeacher = () => {
   return (
     <div>
-      <Header />
+      <TeacherHeader />
       <div style={{width: '75%', margin: '0 auto', marginTop: '40px'}}>
         <Card.Root>
           <Card.Header>

@@ -8,12 +8,24 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import App from './App.jsx';
 import Home from './pages/Home.jsx';
 import Error from './pages/Error.jsx';
-import LoginStudent from './pages/student/LoginStudent.jsx';
-import LoginTeacher from './pages/teacher/LoginTeacher.jsx';
-import SignupStudent from './pages/student/SignupStudent.jsx';
-import SignupTeacher from './pages/teacher/SignupTeacher.jsx';
-import DashboardStudent from './pages/student/DashboardStudent.jsx';
-import DashboardTeacher from './pages/teacher/DashboardTeacher.jsx';
+
+// Import student pages
+import LoginStudent from './pages/student/StudentLogin.jsx';
+import SignupStudent from './pages/student/StudentSignup.jsx';
+import StudentDashboard from './pages/student/StudentDashboard.jsx';
+import StudentProfile from './pages/student/StudentProfile.jsx';
+import StudentClassView from './pages/student/StudentClassView.jsx';
+import StudentNotifications from './pages/student/StudentNotifications.jsx';
+
+// Import teacher pages
+import LoginTeacher from './pages/teacher/TeacherLogin.jsx';
+import SignupTeacher from './pages/teacher/TeacherSignup.jsx';
+import TeacherDashboard from './pages/teacher/TeacherDashboard.jsx';
+import TeacherClassView from './pages/teacher/TeacherClassView.jsx';
+import TeacherNotifications from './pages/teacher/TeacherNotifications.jsx';
+import TeacherStudentView from './pages/teacher/TeacherStudentView.jsx';
+import TeacherProfile from './pages/teacher/TeacherProfile.jsx';
+
 
 // Create the browser router
 const router = createBrowserRouter([
@@ -26,6 +38,8 @@ const router = createBrowserRouter([
         index: true,
         element: <Home />,
       },
+
+      // Student routes
       {
         path: '/student/login',
         element: <LoginStudent />
@@ -35,6 +49,24 @@ const router = createBrowserRouter([
         element: <SignupStudent />
       },
       {
+        path: '/student/dashboard',
+        element: <StudentDashboard />
+      },
+      {
+        path: '/student/notifications',
+        element: <StudentNotifications />
+      },
+      {
+        path: '/student/class',
+        element: <StudentClassView />
+      },
+      {
+        path: '/student/me',
+        element: <StudentProfile />
+      },
+
+      // Teacher routes
+      {
         path: '/teacher/login',
         element: <LoginTeacher />
       },
@@ -43,13 +75,25 @@ const router = createBrowserRouter([
         element: <SignupTeacher />
       },
       {
-        path: '/student/dashboard',
-        element: <DashboardStudent />
+        path: '/teacher/dashboard',
+        element: <TeacherDashboard />
       },
       {
-        path: '/teacher/dashboard',
-        element: <DashboardTeacher />
-      }
+        path: '/teacher/notifications',
+        element: <TeacherNotifications />
+      },
+      {
+        path: '/teacher/class',
+        element: <TeacherClassView />
+      },
+      {
+        path: '/teacher/studentview',
+        element: <TeacherStudentView />
+      },
+      {
+        path: '/teacher/me',
+        element: <TeacherProfile />
+      },
     ]
   }
 ]);

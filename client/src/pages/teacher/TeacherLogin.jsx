@@ -1,23 +1,24 @@
-import { Card, Field, Input, Heading, Button } from '@chakra-ui/react'
+import { Card, Field, Input, Heading, Button, Image } from '@chakra-ui/react'
 import { Link } from 'react-router-dom'
 import { PasswordInput } from "../../components/ui/password-input"
 
-const SignupTeacher = () => {
+const LoginTeacher = () => {
   return (
     <div className='login'>
       <Heading size={'6xl'}>Welcome to EduTracker</Heading>
+      <Image
+        src='/edutracker-logo.svg'
+        alt='EduTracker Logo'
+        boxSize='300px'
+        objectFit='cover'
+        margin={'0 auto'}
+      />
       <div className='login-card'>
         <Card.Root>
           <Card.Header>
-            <Card.Title style={{textAlign: 'center'}}>Teacher Sign Up</Card.Title>
+            <Card.Title style={{textAlign: 'center'}}>Teacher Login</Card.Title>
           </Card.Header>
           <Card.Body>
-          <div className='login-form-control'>
-              <Field.Root>
-                <Field.Label>Your Name</Field.Label>
-                <Input placeholder='John Doe' name='name' />
-              </Field.Root>
-            </div>
             <div className='login-form-control'>
               <Field.Root>
                 <Field.Label>Your Email</Field.Label>
@@ -26,28 +27,16 @@ const SignupTeacher = () => {
             </div>
             <div className='login-form-control'>
               <Field.Root>
-                <Field.Label>Confirm Email</Field.Label>
-                <Input placeholder='example@email.com' name='emailConfirm' />
-              </Field.Root>
-            </div>
-            <div className='login-form-control'>
-              <Field.Root>
                 <Field.Label>Your Password</Field.Label>
                 <PasswordInput placeholder='supersecretpassword' name='password' />
-              </Field.Root>
-            </div>
-            <div className='login-form-control'>
-              <Field.Root>
-                <Field.Label>Confirm Password</Field.Label>
-                <PasswordInput placeholder='supersecretpassword' name='passwordConfirm' />
               </Field.Root>
             </div>
           </Card.Body>
           <Card.Footer style={{ display: 'flex', flexDirection: 'column' }}>
             <Button colorPalette={'blue'} style={{margin: '0 auto'}}>Login</Button>
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-              <Link to='/student/login'>Already have an account? Click here!</Link>
-              <Link to='/student/signup'>Not a teacher? Click here</Link>
+              <Link to='/teacher/signup'>Don't have an account? Click here!</Link>
+              <Link to='/student/login'>Not a teacher? Click here</Link>
             </div>
           </Card.Footer>
         </Card.Root>
@@ -56,4 +45,4 @@ const SignupTeacher = () => {
   )
 }
 
-export default SignupTeacher;
+export default LoginTeacher;

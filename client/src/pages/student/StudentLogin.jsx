@@ -1,4 +1,4 @@
-import { Card, Field, Input, Heading, Button } from '@chakra-ui/react'
+import { Card, Field, Input, Heading, Button, Image } from '@chakra-ui/react'
 import { Link } from 'react-router-dom'
 import { PasswordInput } from "../../components/ui/password-input"
 
@@ -6,6 +6,13 @@ const LoginStudent = () => {
   return (
     <div className='login'>
       <Heading size={'6xl'}>Welcome to EduTracker</Heading>
+      <Image
+        src='/edutracker-logo.svg'
+        alt='EduTracker Logo'
+        boxSize='300px'
+        objectFit='cover'
+        margin={'0 auto'}
+      />
       <div className='login-card'>
         <Card.Root>
           <Card.Header>

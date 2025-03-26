@@ -1,15 +1,15 @@
 import { Table, Card, Button } from "@chakra-ui/react";
 
-const ClassCardTeacher = (cls) => {
+const ClassCardTeacher = ({ cls }) => {
 
   // Destructure the class object to get the students
-  const students = cls.cls.students || [];
+  const students = cls.students || [];
 
   return (
     <Card.Root>
       <Card.Header>
-        {console.log(cls.cls.className)}
-        <Card.Title>{cls.cls.className}</Card.Title>
+        {console.log(cls.className)}
+        <Card.Title>{cls.className}</Card.Title>
       </Card.Header>
       <Card.Body>
         <Table.Root size={"md"} variant={"outline"}>
