@@ -1,5 +1,6 @@
 // Import components
 import { Card, Heading } from '@chakra-ui/react';
+import StudentHeader from '../../components/StudentHeader';
 
 const classes = [
   {
@@ -19,6 +20,7 @@ const classes = [
 const DashboardStudent = () => {
   return (
     <div>
+      <StudentHeader />
       <div style={{width: '75%', margin: '0 auto', marginTop: '20px'}}>
         <Card.Root>
           <Card.Header>

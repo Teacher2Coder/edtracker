@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, Box, Flex, Text, Button, Stack } from "@chakra-ui/react";
 
-import Logo from "./Logo";
+import Logo from "../Logo";
 
 const NavBar = (props) => {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -75,9 +75,6 @@ const MenuLinks = ({ isOpen }) => {
       >
         <MenuItem to="/teacher/dashboard">
           <Button colorPalette={'gray'}>Home</Button>
-        </MenuItem>
-        <MenuItem to="/teacher/calendar">
-          <Button colorPalette={'gray'}>Calender</Button>
         </MenuItem>
         <MenuItem to="/teacher/notifications">
           <Button colorPalette={'gray'}>Notifications</Button>

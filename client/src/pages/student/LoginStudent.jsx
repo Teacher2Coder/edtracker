@@ -1,15 +1,15 @@
 import { Card, Field, Input, Heading, Button } from '@chakra-ui/react'
 import { Link } from 'react-router-dom'
-import { PasswordInput } from "../components/ui/password-input"
+import { PasswordInput } from "../../components/ui/password-input"
 
-const LoginTeacher = () => {
+const LoginStudent = () => {
   return (
     <div className='login'>
       <Heading size={'6xl'}>Welcome to EduTracker</Heading>
       <div className='login-card'>
         <Card.Root>
           <Card.Header>
-            <Card.Title style={{textAlign: 'center'}}>Teacher Login</Card.Title>
+            <Card.Title style={{textAlign: 'center'}}>Student Login</Card.Title>
           </Card.Header>
           <Card.Body>
             <div className='login-form-control'>
@@ -28,8 +28,8 @@ const LoginTeacher = () => {
           <Card.Footer style={{ display: 'flex', flexDirection: 'column' }}>
             <Button colorPalette={'blue'} style={{margin: '0 auto'}}>Login</Button>
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-              <Link to='/teacher/signup'>Don't have an account? Click here!</Link>
-              <Link to='/student/login'>Not a teacher? Click here</Link>
+              <Link to='/student/signup'>Don't have an account? Click here!</Link>
+              <Link to='/teacher/login'>Not a student? Click here</Link>
             </div>
           </Card.Footer>
         </Card.Root>
@@ -38,4 +38,4 @@ const LoginTeacher = () => {
   )
 }
 
-export default LoginTeacher;
+export default LoginStudent;

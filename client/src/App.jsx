@@ -9,9 +9,6 @@ import {
 import { setContext } from '@apollo/client/link/context';
 import { useEffect, useState } from 'react';
 
-// Import components
-import Header from './components/Header';
-// import Footer from './components/Footer';
 
 // Import styles
 import './App.css';
@@ -51,19 +48,9 @@ const App = () => {
   return (
     <ApolloProvider client={client}>
       <div className="app-container">
-        {/* Only render header if not on home, login or signup pages */}
-        {
-          location.pathname !== '/teacher/login'
-          && location.pathname !== '/teacher/signup'
-          && location.pathname !== '/'
-          && location.pathname !== '/student/login'
-          && location.pathname !== '/student/signup'
-          && ( <Header />)
-        }
         <main>
           <Outlet />
         </main>
-        {/* <Footer /> */}
       </div>
     </ApolloProvider>
   )

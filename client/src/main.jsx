@@ -8,12 +8,12 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import App from './App.jsx';
 import Home from './pages/Home.jsx';
 import Error from './pages/Error.jsx';
-import LoginStudent from './pages/LoginStudent.jsx';
-import LoginTeacher from './pages/LoginTeacher.jsx';
-import SignupStudent from './pages/SignupStudent.jsx';
-import SignupTeacher from './pages/SignupTeacher.jsx';
-import DashboardStudent from './pages/DashboardStudent.jsx';
-import DashboardTeacher from './pages/DashboardTeacher.jsx';
+import LoginStudent from './pages/student/LoginStudent.jsx';
+import LoginTeacher from './pages/teacher/LoginTeacher.jsx';
+import SignupStudent from './pages/student/SignupStudent.jsx';
+import SignupTeacher from './pages/teacher/SignupTeacher.jsx';
+import DashboardStudent from './pages/student/DashboardStudent.jsx';
+import DashboardTeacher from './pages/teacher/DashboardTeacher.jsx';
 
 // Create the browser router
 const router = createBrowserRouter([
