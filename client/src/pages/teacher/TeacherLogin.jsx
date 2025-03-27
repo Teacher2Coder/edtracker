@@ -3,6 +3,13 @@ import { Link } from 'react-router-dom'
 import { PasswordInput } from "../../components/ui/password-input"
 
 const LoginTeacher = () => {
+  
+  const handleTeacherLogin = (event) => {
+    event.preventDefault();
+
+    location.href = '/teacher/dashboard';
+  }
+  
   return (
     <div className='login'>
       <Heading size={'6xl'}>Welcome to EduTracker</Heading>
@@ -33,7 +40,13 @@ const LoginTeacher = () => {
             </div>
           </Card.Body>
           <Card.Footer style={{ display: 'flex', flexDirection: 'column' }}>
-            <Button colorPalette={'blue'} style={{margin: '0 auto'}}>Login</Button>
+            <Button 
+              colorPalette={'blue'} 
+              style={{margin: '0 auto'}}
+              onClick={handleTeacherLogin}
+            >
+              Login
+            </Button>
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
               <Link to='/teacher/signup'>Don't have an account? Click here!</Link>
               <Link to='/student/login'>Not a teacher? Click here</Link>

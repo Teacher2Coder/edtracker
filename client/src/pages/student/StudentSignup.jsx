@@ -5,6 +5,13 @@ import { PasswordInput } from "../../components/ui/password-input"
 
 // Define SignupStudent function
 const SignupStudent = () => {
+  
+  const handleStudentSignup = (event) => {
+    event.preventDefault();
+
+    location.href = '/student/dashboard';
+  }
+  
   return (
     <div className='login'>
       <Heading size={'6xl'}>Welcome to EduTracker</Heading>
@@ -53,7 +60,13 @@ const SignupStudent = () => {
             </div>
           </Card.Body>
           <Card.Footer style={{ display: 'flex', flexDirection: 'column' }}>
-            <Button colorPalette={'blue'} style={{margin: '0 auto'}}>Sign up!</Button>
+            <Button 
+              colorPalette={'blue'} 
+              style={{margin: '0 auto'}}
+              onClick={handleStudentSignup}
+            >
+              Sign up!
+            </Button>
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
               <Link to='/student/login'>Already have an account? Click here!</Link>
               <Link to='/teacher/signup'>Not a student? Click here</Link>

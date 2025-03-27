@@ -1,7 +1,19 @@
 import React from "react";
-import { Link, Box, Flex, Text, Button, Stack } from "@chakra-ui/react";
+import {
+  Link,
+  Box,
+  Flex,
+  Text,
+  Button,
+  Stack,
+  Circle,
+  Float,
+} from "@chakra-ui/react";
 
 import Logo from "../Logo";
+
+// Mock notification count for demonstration purposes
+const notifications = 3;
 
 const NavBar = (props) => {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -68,23 +80,31 @@ const MenuLinks = ({ isOpen }) => {
     >
       <Stack
         spacing={8}
+        gap={3}
         align="center"
-        justify={["center", "space-between", "flex-end", "flex-end"]}
+        justify={["center", "space-around", "flex-end", "flex-end"]}
         direction={["column", "row", "row", "row"]}
         pt={[4, 4, 0, 0]}
       >
         <MenuItem to="/teacher/dashboard">
-          <Button colorPalette={'gray'}>Home</Button>
+          <Button colorPalette={"gray"}>Home</Button>
         </MenuItem>
         <MenuItem to="/teacher/notifications">
-          <Button colorPalette={'gray'}>Notifications</Button>
+          <Box position="relative">
+            <Button colorPalette={"gray"}>Notifications</Button>
+            <Float>
+              <Circle size="5" bg="red" color="white">
+                {notifications}
+              </Circle>
+            </Float>
+          </Box>
         </MenuItem>
         <MenuItem to="/teacher/me" isLast>
           <Button
             size="md"
             rounded="md"
-            colorPalette={'gray'}
-            color={'gray.900'}
+            colorPalette={"gray"}
+            color={"gray.900"}
           >
             Your Profile
           </Button>
@@ -104,7 +124,7 @@ const NavBarContainer = ({ children, ...props }) => {
       w="100%"
       mb={8}
       p={8}
-      bg={'blue.600'}
+      bg={"blue.600"}
       color={["white", "white", "primary.700", "primary.700"]}
       {...props}
     >

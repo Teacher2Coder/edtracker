@@ -1,6 +1,5 @@
 // Import dependencies
 import ReactDOM from 'react-dom/client';
-import React from 'react';
 import { Provider } from './components/ui/provider.jsx'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 

@@ -3,6 +3,13 @@ import { Link } from 'react-router-dom'
 import { PasswordInput } from "../../components/ui/password-input"
 
 const SignupTeacher = () => {
+  
+  const handleTeacherSignup = (event) => {
+    event.preventDefault();
+
+    location.href = '/teacher/dashboard';
+  }
+
   return (
     <div className='login'>
       <Heading size={'6xl'}>Welcome to EduTracker</Heading>
@@ -51,7 +58,13 @@ const SignupTeacher = () => {
             </div>
           </Card.Body>
           <Card.Footer style={{ display: 'flex', flexDirection: 'column' }}>
-            <Button colorPalette={'blue'} style={{margin: '0 auto'}}>Sign up!</Button>
+            <Button 
+              colorPalette={'blue'}
+              style={{margin: '0 auto'}}
+              onClick={handleTeacherSignup}
+            >
+              Sign up!
+            </Button>
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
               <Link to='/student/login'>Already have an account? Click here!</Link>
               <Link to='/student/signup'>Not a teacher? Click here</Link>

@@ -1,11 +1,41 @@
+import { Heading, Stack } from "@chakra-ui/react";
+
 import TeacherHeader from '../../components/teacher/TeacherHeader';
+import TeacherNotificationCard from "../../components/teacher/TeacherNotificationCard";
+
+// Mock Notification Data
+const notifications = [
+  {
+    id: 1,
+    title: "Assignment due",
+    message: "Your assignment is due tomorrow.",
+  },
+  {
+    id: 2,
+    title: "New Message",
+    message: "You have a new message from your instructor.",
+  },
+  {
+    id: 3,
+    title: "Register for class",
+    message: "Don't forget to register for classes!",
+  },
+];
 
 const TeacherNotifications = () => {
   return (
     <div>
       <TeacherHeader />
-      <h1>Teacher Notifications</h1>
-      <p>This is the notifications page for teachers.</p>
+      <div style={{ width: "75%", margin: "0 auto", marginTop: "20px" }}>
+        <Heading style={{ marginBottom: '20px' }}>Teacher Notifications</Heading>
+        <Stack>
+          {notifications.map((notification) => (
+            <div key={notification.id}>
+              <TeacherNotificationCard notification={notification} />
+            </div>
+          ))}
+        </Stack>
+      </div>
     </div>
   );
 }
