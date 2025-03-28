@@ -1,11 +1,28 @@
-import TeacherHeader from '../../components/teacher/TeacherHeader';
+import { Heading } from '@chakra-ui/react'
+
+import TeacherHeader from '../../components/teacher/teacherHeader';
+import TeacherProfileCard from '../../components/teacher/TeacherProfileCard';
+
 
 const TeacherProfile = () => {
+  
+  const teacher = {
+    profilePicture: 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png',
+    name: 'John Doe',
+    email: 'john.doe@gmail.com',
+    bio: 'A passionate educator and aspiring software developer.',
+  }
+  
   return (
     <div>
       <TeacherHeader />
-      <h1>Teacher Profile</h1>
-      {/* Add your profile details here */}
+      <Heading
+        size={'xl'}
+        style={{ textAlign: 'center' }}
+      >
+        Teacher Profile
+      </Heading>
+      <TeacherProfileCard teacher={teacher} />
     </div>
   );
 }
