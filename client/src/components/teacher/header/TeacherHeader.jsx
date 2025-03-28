@@ -10,7 +10,7 @@ import {
   Float,
 } from "@chakra-ui/react";
 
-import Logo from "../Logo";
+import Logo from '../../Logo';
 
 // Mock notification count for demonstration purposes
 const notifications = 3;

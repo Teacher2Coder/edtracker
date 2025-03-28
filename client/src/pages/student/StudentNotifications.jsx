@@ -1,7 +1,7 @@
 import { Heading, Stack } from "@chakra-ui/react";
 
-import StudentHeader from "../../components/student/StudentHeader";
-import StudentNotificationCard from "../../components/student/StudentNotificationCard";
+import StudentHeader from "../../components/student/header/StudentHeader";
+import StudentNotificationCard from "../../components/student/notifications/StudentNotificationCard";
 
 // Mock Notification Data
 const notifications = [

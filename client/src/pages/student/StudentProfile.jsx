@@ -1,7 +1,7 @@
 import { Heading } from '@chakra-ui/react'
 
-import StudentHeader from '../../components/student/StudentHeader';
-import StudentProfileCard from '../../components/student/StudentProfileCard';
+import StudentHeader from '../../components/student/header/StudentHeader';
+import StudentProfileCard from '../../components/student/profile/StudentProfileCard';
 
 
 const StudentProfile = () => {

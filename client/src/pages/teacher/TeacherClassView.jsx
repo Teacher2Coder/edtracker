@@ -1,4 +1,4 @@
-import TeacherHeader from '../../components/teacher/TeacherHeader';
+import TeacherHeader from '../../components/teacher/header/TeacherHeader';
 
 const TeacherClassView = () => {
   return (

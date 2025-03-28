@@ -1,7 +1,7 @@
 // Import components
 import { Card, Heading, Stack, Button } from "@chakra-ui/react";
-import StudentHeader from "../../components/student/StudentHeader";
-import StudentClassCard from "../../components/student/StudentClassCard";
+import StudentHeader from "../../components/student/header/StudentHeader";
+import StudentClassCard from "../../components/student/dashboard/StudentClassCard";
 
 const classes = [
   {

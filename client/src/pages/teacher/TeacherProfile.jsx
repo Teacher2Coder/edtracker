@@ -1,7 +1,7 @@
 import { Heading } from '@chakra-ui/react'
 
-import TeacherHeader from '../../components/teacher/teacherHeader';
-import TeacherProfileCard from '../../components/teacher/TeacherProfileCard';
+import TeacherHeader from '../../components/teacher/header/TeacherHeader';
+import TeacherProfileCard from '../../components/teacher/profile/TeacherProfileCard';
 
 
 const TeacherProfile = () => {
