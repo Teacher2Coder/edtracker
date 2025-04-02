@@ -14,21 +14,7 @@ Class.init(
     className: {
       type: DataTypes.STRING,
       allowNull: false,
-    },
-    teacherId: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: 'teacher',
-        key: 'id',
-      },
-    },
-    studentIds: [{
-      type: DataTypes.INTEGER,
-      references: {
-        model: 'student',
-        key: 'id'
-      }
-    }]
+    }
   },
   {
     sequelize,

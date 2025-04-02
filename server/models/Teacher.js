@@ -1,10 +1,10 @@
 const { Model, DataTypes } = require('sequelize');
-const bcrypt = require('bcrypt');
 const sequelize = require('../config/connection');
+const bcrypt = require('bcrypt');
 
 class Teacher extends Model {
   checkPassword(loginPw) {
-    return bcrypt.compareSync(loginPw, this.password);
+    return bcrypt.compareSync(loginPw, this.teacherPassword);
   }
 }
 
@@ -19,6 +19,7 @@ Teacher.init(
     teacherName: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
     },
     teacherEmail: {
       type: DataTypes.STRING,
@@ -34,26 +35,12 @@ Teacher.init(
       validate: {
         len: [8],
       },
-    },
-    classes: [{
-      type: DataTypes.INTEGER,
-      references: {
-        model: 'class',
-        key: 'id'
-      }
-    }],
-    notifications: [{
-      type: DataTypes.INTEGER,
-      references: {
-        model: 'notification',
-        key: 'id'
-      }
-    }]
+    }
   },
   {
     hooks: {
       beforeCreate: async (newTeacherData) => {
-        newTeacherData.password = await bcrypt.hash(newTeacherData.password, 10);
+        newTeacherData.teacherPassword = await bcrypt.hash(newTeacherData.teacherPassword, 10);
         return newTeacherData;
       },
     },
