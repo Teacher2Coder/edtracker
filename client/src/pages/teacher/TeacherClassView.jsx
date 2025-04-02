@@ -1,5 +1,7 @@
 import TeacherHeader from '../../components/teacher/header/TeacherHeader';
 
+import useFetch from '../../utils/useFetch';
+
 const TeacherClassView = () => {
   return (
     <div>

@@ -3,6 +3,8 @@ import { Heading, Stack } from "@chakra-ui/react";
 import TeacherHeader from '../../components/teacher/header/TeacherHeader';
 import TeacherNotificationCard from "../../components/teacher/notifications/TeacherNotificationCard";
 
+import useFetch from '../../utils/useFetch';
+
 // Mock Notification Data
 const notifications = [
   {

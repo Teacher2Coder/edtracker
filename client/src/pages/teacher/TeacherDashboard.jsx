@@ -3,6 +3,8 @@ import { Card, Heading, Button, Stack } from '@chakra-ui/react';
 import TeacherHeader from '../../components/teacher/header/TeacherHeader';
 import ClassCardTeacher from '../../components/teacher/dashboard/TeacherClassCard';
 
+import useFetch from '../../utils/useFetch';
+
 // Mock data for classes and students
 const classes = [
   {
