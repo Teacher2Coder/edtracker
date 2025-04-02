@@ -2,6 +2,8 @@ import { Card, Field, Input, Heading, Button, Image } from '@chakra-ui/react'
 import { Link } from 'react-router-dom'
 import { PasswordInput } from "../../components/ui/password-input"
 
+import { useAuth } from '../../utils/useAuth';
+
 const LoginStudent = () => {
   
   const handleStudentLogin = (event) => {

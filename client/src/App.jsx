@@ -1,5 +1,5 @@
 // Import dependencies
-import { Outlet, useLocation } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import {
   ApolloClient,
   InMemoryCache,
@@ -7,8 +7,8 @@ import {
   createHttpLink,
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
-import { useEffect, useState } from 'react';
 
+import { AuthProvider } from './utils/useAuth';
 
 // Import styles
 import './App.css';
@@ -37,22 +37,16 @@ const client = new ApolloClient({
 
 // Define the main App component
 const App = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const location = useLocation();
-
-  useEffect(() => {
-    const token = localStorage.getItem("id_token");
-    setIsLoggedIn(!!token);
-  }, []);
-
   return (
-    <ApolloProvider client={client}>
-      <div className="app-container">
-        <main>
-          <Outlet />
-        </main>
-      </div>
-    </ApolloProvider>
+    <AuthProvider>
+      <ApolloProvider client={client}>
+        <div className="app-container">
+          <main>
+            <Outlet />
+          </main>
+        </div>
+      </ApolloProvider>
+    </AuthProvider>
   )
 }
 
