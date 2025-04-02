@@ -1,5 +1,4 @@
 // Import the dependencies
-require('dotenv').config();
 const express = require('express');
 const { ApolloServer } = require('@apollo/server');
 const { expressMiddleware } = require('@apollo/server/express4');
@@ -25,9 +24,10 @@ const startApolloServer = async () => {
   app.use(express.json());
 
   // Serve up static assets
-  app.use(express.static(path.join(__dirname, '../client/images')));
+  app.use("/images", express.static(path.join(__dirname, '../client/images')));
 
-  app.use('/graphql',
+  app.use(
+    '/graphql',
     expressMiddleware(server, {
       context: authMiddleware,
     })
@@ -35,24 +35,32 @@ const startApolloServer = async () => {
 
   // If in the production environment, serve the static files from the React app
   if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(__dirname, '../client/build')));
+    app.use(express.static(path.join(__dirname, '../client/dist')));
 
     app.get('*', (req, res) => {
-      res.sendFile(path.join(__dirname, '../client/build/index.html'));
+      res.sendFile(path.join(__dirname, '../client/dist/index.html'));
     });
   }
 
-  // Log the database connection details
-  console.log('DB Name: ', process.env.DB_NAME)
-  console.log('DB User: ', process.env.DB_USER)
-  console.log('DB Password: ', process.env.DB_PASSWORD)
-
-  db.sync({ force: false }).then(() => {
+  db.sync({ force: false })
+  .then(() => {
+    console.log('Database synced successfully.');
     app.listen(PORT, () => {
-      console.log(`API server running on port ${PORT}!`);
+      console.log(`Server running on port ${PORT}`);
     });
+  })
+  .catch((err) => {
+    console.error('Error syncing database:', err);
   });
 }
+
+// Test the database connection before starting the server
+db.testDbConnection().then(() => {
+  console.log('Database connection test completed.');
+}).catch((error) => {
+  console.error('Error testing database connection:', error);
+  process.exit(1); // Exit if the database connection fails
+});
 
 // Call the startApolloServer function
 startApolloServer().catch((err) => {

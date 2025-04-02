@@ -4,7 +4,7 @@ const sequelize = require('../config/connection');
 
 class Student extends Model {
   checkPassword(loginPw) {
-    return bcrypt.compareSync(loginPw, this.password);
+    return bcrypt.compareSync(loginPw, this.studentPassword);
   }
 }
 
@@ -34,33 +34,12 @@ Student.init(
       validate: {
         len: [8],
       },
-    },
-    classes: [{
-      type: DataTypes.INTEGER,
-      references: {
-        model: 'class',
-        key: 'id'
-      }
-    }],
-    assignments: [{
-      type: DataTypes.INTEGER,
-      references: {
-        model: 'assignments',
-        key: 'id'
-      }
-    }],
-    notifications: [{
-      type: DataTypes.INTEGER,
-      references: {
-        model: 'notification',
-        key: 'id'
-      }
-    }]
+    }
   },
   {
     hooks: {
       beforeCreate: async (newStudentData) => {
-        newStudentData.password = await bcrypt.hash(newStudentData.password, 10);
+        newStudentData.studentPassword = await bcrypt.hash(newStudentData.studentPassword, 10);
         return newStudentData;
       },
     },

@@ -1,5 +1,5 @@
 const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../config/connection');
+const sequelize = require('../../config/connection');
 
 class TeacherNotification extends Model {}
 
@@ -41,7 +41,7 @@ TeacherNotification.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'notification',
+    modelName: 'teacher_notification',
   }
 )
 
