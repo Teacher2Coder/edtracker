@@ -8,7 +8,6 @@ const ClassCardTeacher = ({ cls }) => {
   return (
     <Card.Root>
       <Card.Header>
-        {console.log(cls.className)}
         <Card.Title>{cls.className}</Card.Title>
       </Card.Header>
       <Card.Body>
@@ -22,6 +21,7 @@ const ClassCardTeacher = ({ cls }) => {
             </Table.Row>
           </Table.Header>
           <Table.Body>
+            {/* Linear time */}
             {students.map((student) => (
               <Table.Row key={student.id}>
                 <Table.Cell>{student.name}</Table.Cell>

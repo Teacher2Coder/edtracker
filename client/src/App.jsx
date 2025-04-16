@@ -1,21 +1,19 @@
 // Import dependencies
-import { Outlet } from 'react-router-dom';
+import { Outlet } from "react-router-dom";
 import {
   ApolloClient,
   InMemoryCache,
   ApolloProvider,
   createHttpLink,
-} from '@apollo/client';
-import { setContext } from '@apollo/client/link/context';
-
-import { AuthProvider } from './utils/useAuth';
+} from "@apollo/client";
+import { setContext } from "@apollo/client/link/context";
 
 // Import styles
-import './App.css';
+import "./App.css";
 
 // Create GraphQL API endpoint
 const httpLink = createHttpLink({
-  uri: '/graphql',
+  uri: "/graphql",
 });
 
 // Set up authentication link
@@ -38,17 +36,15 @@ const client = new ApolloClient({
 // Define the main App component
 const App = () => {
   return (
-    <AuthProvider>
-      <ApolloProvider client={client}>
-        <div className="app-container">
-          <main>
-            <Outlet />
-          </main>
-        </div>
-      </ApolloProvider>
-    </AuthProvider>
-  )
-}
+    <ApolloProvider client={client}>
+      <div className="app-container">
+        <main>
+          <Outlet />
+        </main>
+      </div>
+    </ApolloProvider>
+  );
+};
 
 // Export the App component as the default export
 export default App;

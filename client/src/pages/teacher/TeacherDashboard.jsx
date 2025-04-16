@@ -54,6 +54,7 @@ const DashboardTeacher = () => {
       <div style={{width: '75%', margin: '0 auto', marginTop: '20px'}}>
         <Heading>Your classes:</Heading>
         <Stack>
+        {/* Quadratic time */}
         {classes.map((cls) => (
           <div key={cls.className}>
             <ClassCardTeacher cls={cls} />
