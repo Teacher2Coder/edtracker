@@ -29,8 +29,8 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
   const { studentName, studentEmail, studentPassword } = req.body;
   try {
-    const newstudent = await Student.create({ studentName, studentEmail, studentPassword });
-    res.status(201).json(newstudent);
+    const newStudent = await Student.create({ studentName, studentEmail, studentPassword });
+    res.status(201).json(newStudent);
   } catch (error) {
     console.error('Error creating student:', error);
     res.status(500).json({ error: 'Failed to create student' });
@@ -43,7 +43,7 @@ router.put('/:id', async (req, res) => {
   try {
     const student = await Student.findByPk(id);
     if (!student) {
-      return res.status(404).json({ error: 'student not found' });
+      return res.status(404).json({ error: 'Student not found' });
     }
     await student.update({ studentName, studentEmail, studentPassword });
     res.json(student);
