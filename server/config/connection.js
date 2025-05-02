@@ -9,11 +9,6 @@ const dbUser = process.env.DB_USER;
 const dbPassword = process.env.DB_PASSWORD;
 const dbHost = process.env.DB_HOST || 'localhost';
 
-console.log("DB_NAME", dbName);
-console.log("DB_USER", dbUser);
-console.log("DB_PASSWORD", dbPassword);
-console.log("DB_HOST", dbHost);
-
 // Initialize Sequelize
 const sequelize = process.env.DB_URL
   ? new Sequelize(process.env.DB_URL)
@@ -34,11 +29,13 @@ async function testDbConnection() {
     console.log(
       `✅ Connection to database [${dbName}] on host [${dbHost}] successful.`
     );
+    return true;
   } catch (error) {
     console.error(
       `❌ Unable to connect to the database [${dbName}] on host [${dbHost}]:`,
       error
     );
+    return false;
   }
 }
 
