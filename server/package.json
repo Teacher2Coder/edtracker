@@ -19,12 +19,10 @@
   },
   "homepage": "https://github.com/Teacher2Coder/edtracker#readme",
   "dependencies": {
-    "@apollo/server": "^4.11.3",
     "bcrypt": "^5.1.1",
     "connect-session-sequelize": "^7.0.4",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
-    "graphql": "^16.10.0",
     "jsonwebtoken": "^9.0.2",
     "pg": "^8.15.5",
     "sequelize": "^6.37.7",

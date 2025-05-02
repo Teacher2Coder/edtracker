@@ -21,12 +21,10 @@
   },
   "homepage": "https://github.com/Teacher2Coder/edtracker#readme",
   "dependencies": {
-    "@apollo/client": "^3.7.15",
     "@chakra-ui/react": "^3.13.0",
     "@emotion/react": "^11.14.0",
     "@testing-library/react": "^14.0.0",
     "axios": "^1.8.3",
-    "graphql": "^16.10.0",
     "happy-dom": "^9.20.3",
     "jwt-decode": "^4.0.0",
     "next-themes": "^0.4.6",
