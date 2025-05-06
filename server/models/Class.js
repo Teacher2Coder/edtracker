@@ -14,6 +14,8 @@ Class.init(
     sequelize,
     modelName: 'Class',
     timestamps: true,
+    freezeTableName: true,
+    underscored: true,
   }
 );
 

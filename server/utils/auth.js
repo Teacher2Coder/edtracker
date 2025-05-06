@@ -1,7 +1,7 @@
 const { GraphQLError } = require('graphql');
 const jwt = require('jsonwebtoken');
 
-const secret = process.env.AUTH_SECRET;
+const secret = process.env.AUTH_SECRET; // Need to store this in .env
 const expiration = '2h';
 
 module.exports = {
@@ -13,7 +13,6 @@ module.exports = {
   authMiddleware: function ({ req }) {
     // allows token to be sent via req.body, req.query, or headers
     let token = req.body.token || req.query.token || req.headers.authorization;
-    console.log(token)
     // ["Bearer", "<tokenvalue>"]
     if (req.headers.authorization) {
       token = token.split(' ').pop().trim();
@@ -32,8 +31,13 @@ module.exports = {
 
     return req;
   },
-  signToken: function ({ username, email, _id }) {
-    const payload = { username, email, _id };
+  signTokenTeacher: function ({ teacherName, teacherEmail }) {
+    const payload = { teacherName, teacherEmail };
+
+    return jwt.sign({ data: payload }, secret, { expiresIn: expiration });
+  },
+  signTokenStudent: function ({ studentName, studentEmail }) {
+    const payload = { studentName, studentEmail };
 
     return jwt.sign({ data: payload }, secret, { expiresIn: expiration });
   },

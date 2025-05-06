@@ -26,6 +26,8 @@ Assignment.init(
     sequelize,
     modelName: 'Assignment',
     timestamps: true,
+    freezeTableName: true,
+    underscored: true,
   }
 );
 

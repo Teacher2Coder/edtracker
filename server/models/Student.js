@@ -1,7 +1,12 @@
 const { DataTypes, Model } = require('sequelize');
 const { sequelize } = require('../config/connection');
+const bcrypt = require('bcrypt');
 
-class Student extends Model {}
+class Student extends Model {
+  checkPassword(loginPw) {
+    return bcrypt.compareSync(loginPw, this.teacherPassword);
+  }
+}
 
 Student.init(
   {
@@ -20,9 +25,20 @@ Student.init(
     },
   }, 
   {
+    hooks: {
+      async beforeCreate(newStudentData) {
+        newStudentData.studentPassword = await bcrypt.hash(
+          newStudentData.studentPassword,
+          10
+        );
+        return newStudentData;
+      },
+    },
     sequelize,
     modelName: 'student',
     timestamps: true,
+    freezeTableName: true,
+    underscored: true,
   }
 );
 

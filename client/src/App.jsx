@@ -35,6 +35,7 @@ const client = new ApolloClient({
 
 // Define the main App component
 const App = () => {
+  
   return (
     <ApolloProvider client={client}>
       <div className="app-container">

@@ -2,7 +2,6 @@
 import { Teacher, Student, Assignment, Class } from '../models/index.js';
 import { sequelize } from './connection.js';
 
-
 // Helper functions
 const generateRandomName = () => {
   const firstNames = ["Alice", "Bob", "Charlie", "David", "Emily", "Fiona", "George", "Hannah", "Ivy", "Jack", "Kevin", "Liam", "Mia", "Noah", "Olivia", "Paul", "Quinn", "Rachel", "Sam", "Tina"];
@@ -19,15 +18,6 @@ const generateRandomEmail = (name) => {
   const randomDomain = domains[Math.floor(Math.random() * domains.length)];
   const randomNumber = Math.floor(Math.random() * 1000);
   return `${name.toLowerCase().replace(/\s+/g, '.')}${randomNumber}@${randomDomain}`;
-}
-
-const generateRandomPassword = () => {
-  const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  let password = "";
-  for (let i = 0; i < 10; i++) {
-    password += characters.charAt(Math.floor(Math.random() * characters.length));
-  }
-  return password;
 }
 
 const generateRandomClassName = () => {
@@ -47,7 +37,7 @@ const createTeachers = async () => {
   for (let i = 0; i < 10; i++) {
     const teacherName = generateRandomName();
     const teacherEmail = generateRandomEmail(teacherName);
-    const teacherPassword = generateRandomPassword();
+    const teacherPassword = 'password123';
 
     const teacher = {
       teacherName,
@@ -66,7 +56,7 @@ const createStudents = async () => {
   for (let i = 0; i < 10; i++) {
     const studentName = generateRandomName();
     const studentEmail = generateRandomEmail(studentName);
-    const studentPassword = generateRandomPassword();
+    const studentPassword = 'password123';
 
     const student = {
       studentName,
@@ -112,6 +102,30 @@ const createAssignments = async () => {
   return assignments;
 }
 
+// Create all teachers
+const createAllTeachers = async (teachers) => {
+  for (let i = 0; i < teachers.length; i++) {
+    const teacher = teachers[i];
+    try {
+      await Teacher.create(teacher);
+    } catch (error) {
+      console.error("Error creating teacher:", error);
+    }
+  }
+}
+
+// Create all students
+const createAllStudents = async (students) => {
+  for (let i = 0; i < students.length; i++) {
+    const student = students[i];
+    try {
+      await Student.create(student);
+    } catch (error) {
+      console.error("Error creating student:", error);
+    }
+  }
+}
+
 // Seed the database with the generated data arrays
 const seedData = async () => {
   const teachers = await createTeachers();
@@ -119,8 +133,8 @@ const seedData = async () => {
   const classes = await createClasses(teachers);
   const assignments = await createAssignments();
   try {
-    await Teacher.bulkCreate(teachers);
-    await Student.bulkCreate(students);
+    await createAllTeachers(teachers);
+    await createAllStudents(students);
     await Class.bulkCreate(classes);
     await Assignment.bulkCreate(assignments);
   } catch (error) {
