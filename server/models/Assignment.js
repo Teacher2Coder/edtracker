@@ -5,6 +5,12 @@ class Assignment extends Model {}
 
 Assignment.init(
   {
+    id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true,
+    },
     assignmentName: {
       type: DataTypes.STRING,
       allowNull: false,

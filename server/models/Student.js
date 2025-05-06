@@ -4,12 +4,18 @@ const bcrypt = require('bcrypt');
 
 class Student extends Model {
   checkPassword(loginPw) {
-    return bcrypt.compareSync(loginPw, this.teacherPassword);
+    return bcrypt.compareSync(loginPw, this.studentPassword);
   }
 }
 
 Student.init(
   {
+    id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true,
+    },
     studentName: {
       type: DataTypes.STRING,
       allowNull: false,

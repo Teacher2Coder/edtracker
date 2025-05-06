@@ -33,15 +33,11 @@ const resolvers = {
     loginTeacher: async (_, { teacherEmail, teacherPassword }) => {
       const teacher = await Teacher.findOne({ where: { teacherEmail } });
 
-      console.log(teacher);
-
       if (!teacher) {
         throw new AuthenticationError('No teacher found with this email address');
       }
 
       const correctPw = teacher.checkPassword(teacherPassword);
-
-      console.log(correctPw);
 
       if (!correctPw) {
         throw new AuthenticationError('Incorrect password');
@@ -51,8 +47,10 @@ const resolvers = {
       return { token, teacher };
     },
     addTeacher: async (_, { teacherName, teacherEmail, teacherPassword }) => {
-      const newTeacher = new Teacher({ teacherName, teacherEmail, teacherPassword });
-      return await newTeacher.save();
+      const teacher = await Teacher.create({ teacherName, teacherEmail, teacherPassword });
+      console.log(teacher);
+      const token = signTokenTeacher(teacher);
+      return { token, teacher };
     },
     editTeacher: async (_, { id, teacherName, teacherEmail, teacherPassword }) => {
       const teacher = await Teacher.findOne({ where: { id: id } });
@@ -81,10 +79,10 @@ const resolvers = {
       const student = await Student.findOne({ where: { studentEmail } });
 
       if (!student) {
-        throw new AuthenticationError('No teacher found with this email address');
+        throw new AuthenticationError('No student found with this email address');
       }
 
-      const correctPw = await student.checkPassword(studentPassword);
+      const correctPw = student.checkPassword(studentPassword);
 
       if (!correctPw) {
         throw new AuthenticationError('Incorrect password');
@@ -94,8 +92,9 @@ const resolvers = {
       return { token, student };
     },
     addStudent: async (_, { studentName, studentEmail, studentPassword }) => {
-      const newStudent = new Student({ studentName, studentEmail, studentPassword });
-      return await newStudent.save();
+      const student = await Student.create({ studentName, studentEmail, studentPassword });
+      const token = signTokenStudent(student);
+      return { token, student };
     },
     editStudent: async (_, { id, studentName, studentEmail, studentPassword }) => {
       const student = await Student.findOne({ where: { id: id } });

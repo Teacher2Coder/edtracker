@@ -2,11 +2,13 @@ import { gql } from '@apollo/client';
 
 // Teacher mutations
 export const ADD_TEACHER = gql`
-  mutation Mutation($teacherName: String!, $teacherEmail: String!, $teacherPassword: String!) {
+  mutation addTeacher($teacherName: String!, $teacherEmail: String!, $teacherPassword: String!) {
     addTeacher(teacherName: $teacherName, teacherEmail: $teacherEmail, teacherPassword: $teacherPassword) {
-      id
-      teacherEmail
-      teacherName
+      token
+      teacher {
+        teacherEmail
+        teacherName
+      }
     }
   }
 `;
@@ -41,11 +43,13 @@ export const DELETE_TEACHER = gql`
 
 // Student mutations
 export const ADD_STUDENT = gql`
-  mutation Mutation($studentName: String!, $studentEmail: String!, $studentPassword: String!) {
+  mutation addStudent($studentName: String!, $studentEmail: String!, $studentPassword: String!) {
     addStudent(studentName: $studentName, studentEmail: $studentEmail, studentPassword: $studentPassword) {
-      id
-      studentEmail
-      studentName
+      token
+      student {
+        studentEmail
+        studentName
+      }
     }
   }
 `;

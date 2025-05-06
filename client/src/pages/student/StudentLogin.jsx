@@ -1,13 +1,51 @@
 import { Card, Field, Input, Heading, Button, Image } from '@chakra-ui/react'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { useMutation } from '@apollo/client';
 import { PasswordInput } from "../../components/ui/password-input"
+import { LOGIN_STUDENT } from '../../utils/mutations';
+import Auth from '../../utils/auth';
 
 const LoginStudent = () => {
   
-  const handleStudentLogin = (event) => {
+  const [formData, setFormData] = useState({
+    studentEmail: '',
+    studentPassword: ''
+  });
+
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const [loginStudent, { error, data }] = useMutation(LOGIN_STUDENT);
+
+  function handleInputChange(event) {
+    const { name, value } = event.target;
+
+    setFormData({
+      ...formData,
+      [name]: value
+    });
+  }
+
+  const handleStudentLogin = async (event) => {
     event.preventDefault();
 
-    location.href = '/student/dashboard';
+    const { studentEmail, studentPassword } = formData;
+
+    if (studentEmail && studentPassword) {
+      try {
+        const { data } = await loginStudent({
+          variables: { studentEmail, studentPassword }
+        });
+        console.log(data);
+        Auth.login(data.loginStudent.token);
+        window.location.assign('/student/dashboard');
+      } catch (e) {
+        console.error(e);
+        setErrorMessage('An error occurred while logging in. Please try again.');
+      }
+    } else {
+      setErrorMessage('Please input an email and password.');
+    }
   }
   
   return (
@@ -29,13 +67,13 @@ const LoginStudent = () => {
             <div className='login-form-control'>
               <Field.Root>
                 <Field.Label>Your Email</Field.Label>
-                <Input placeholder='example@email.com' name='email' />
+                <Input placeholder='example@email.com' name='studentEmail' onChange={handleInputChange}/>
               </Field.Root>
             </div>
             <div className='login-form-control'>
               <Field.Root>
                 <Field.Label>Your Password</Field.Label>
-                <PasswordInput placeholder='supersecretpassword' name='password' />
+                <PasswordInput placeholder='supersecretpassword' name='studentPassword' onChange={handleInputChange}/>
               </Field.Root>
             </div>
           </Card.Body>
@@ -47,6 +85,7 @@ const LoginStudent = () => {
             >
               Login
             </Button>
+            {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
               <Link to='/student/signup'>Don't have an account? Click here!</Link>
               <Link to='/teacher/login'>Not a student? Click here</Link>

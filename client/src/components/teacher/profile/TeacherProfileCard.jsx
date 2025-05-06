@@ -2,6 +2,7 @@
 import { Card, Image } from "@chakra-ui/react";
 
 import TeacherEditProfileModal from "./TeacherEditProfileModal";
+import TeacherSignoutModal from "./TeacherSignoutModal";
 
 const TeacherProfileCard = ({ teacher }) => {
   return (
@@ -27,6 +28,7 @@ const TeacherProfileCard = ({ teacher }) => {
         </Card.Body>
         <Card.Footer>
           <TeacherEditProfileModal />
+          <TeacherSignoutModal />
         </Card.Footer>
       </Card.Root>
     </div>

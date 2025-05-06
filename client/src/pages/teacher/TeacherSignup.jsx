@@ -49,9 +49,8 @@ const SignupTeacher = () => {
             const { data } = await addTeacher({
               variables: { teacherName, teacherEmail, teacherPassword }
             });
-            console.log(data);
             Auth.login(data.addTeacher.token);
-            // Redirect to the login page or show a success message
+            window.location.assign('/teacher/dashboard');
           } catch (e) {
             console.error(e);
             setErrorMessage('An error occurred while signing up. Please try again.');

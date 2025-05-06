@@ -10,6 +10,12 @@ class Teacher extends Model {
 
 Teacher.init(
   {
+    id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true,
+    },
     teacherName: {
       type: DataTypes.STRING,
       allowNull: false,

@@ -38,6 +38,7 @@ const LoginTeacher = () => {
         });
         console.log(data);
         Auth.login(data.loginTeacher.token);
+        window.location.assign('/teacher/dashboard');
       } catch (e) {
         console.error(e);
         setErrorMessage('An error occurred while logging in. Please try again.');

@@ -144,15 +144,21 @@ const seedData = async () => {
 
 // Define the seed function
 const handleSeedDatabase = async () => {
+  const startTime = performance.now();
   try {
     await sequelize.sync({ force: true });
     await seedData();
   } catch (error) {
     console.error("Error seeding database:", error);
   } finally {
+    const endTime = performance.now();
+    const totalTime = endTime - startTime;
+    console.log('----------------------------------------');
+    console.log(`Seeding completed in ${totalTime/1000} seconds`);
     process.exit(0);
   }
 };
 
 // Execute the seed function
+
 handleSeedDatabase();

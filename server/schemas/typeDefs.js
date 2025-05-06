@@ -49,11 +49,11 @@ const typeDefs = `
 
   type Mutation {
     loginTeacher(teacherEmail: String!, teacherPassword: String!): AuthTeacher
-    addTeacher(teacherName: String!, teacherEmail: String!, teacherPassword: String!): Teacher
+    addTeacher(teacherName: String!, teacherEmail: String!, teacherPassword: String!): AuthTeacher
     editTeacher(id: ID!, teacherName: String!, teacherEmail: String!, teacherPassword: String!): Teacher
-    deleteTeacher(idd: ID!): Teacher
+    deleteTeacher(id: ID!): Teacher
     loginStudent(studentEmail: String!, studentPassword: String!): AuthStudent
-    addStudent(studentName: String!, studentEmail: String!, studentPassword: String!): Student
+    addStudent(studentName: String!, studentEmail: String!, studentPassword: String!): AuthStudent
     editStudent(id: ID!, studentName: String!, studentEmail: String!, studentPassword: String!): Student
     deleteStudent(id: ID!): Student
     addAssignment(assignmentName: String!, assignmentDescription: String!, assignDate: String!, dueDate: String!): Assignment
