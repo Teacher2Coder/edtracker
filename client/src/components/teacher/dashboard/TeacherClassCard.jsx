@@ -24,10 +24,10 @@ const ClassCardTeacher = ({ cls }) => {
             {/* Linear time */}
             {students.map((student) => (
               <Table.Row key={student.id}>
-                <Table.Cell>{student.name}</Table.Cell>
-                <Table.Cell textAlign="center">{student.assignments.toString()}</Table.Cell>
-                <Table.Cell textAlign="center">{student.ungraded.toString()}</Table.Cell>
-                <Table.Cell textAlign="end">{student.pastDue.toString()}</Table.Cell>
+                <Table.Cell>{student.studentName}</Table.Cell>
+                <Table.Cell textAlign="center">0</Table.Cell>
+                <Table.Cell textAlign="center">0</Table.Cell>
+                <Table.Cell textAlign="end">0</Table.Cell>
               </Table.Row>
             ))}
           </Table.Body>

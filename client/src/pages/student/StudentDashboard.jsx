@@ -2,78 +2,36 @@
 import { Card, Heading, Stack, Button } from "@chakra-ui/react";
 import StudentHeader from "../../components/student/header/StudentHeader";
 import StudentClassCard from "../../components/student/dashboard/StudentClassCard";
+import Auth from "../../utils/auth";
+import NotLoggedIn from "../../components/NotLoggedIn";
+import { QUERY_STUDENT_DASHBOARD } from "../../utils/queries";
+import { useQuery } from "@apollo/client";
 
-const classes = [
-  {
-    className: "Algebra",
-    teacherName: "Mr. Black",
-    assignments: [
-      {
-        id: 1,
-        name: "Assignment 1",
-        dateAssigned: "2023-10-01",
-        dateDue: "2023-10-15",
-        status: "Ungraded",
-      },
-      {
-        id: 2,
-        name: "Assignment 2",
-        dateAssigned: "2023-10-05",
-        dateDue: "2023-10-20",
-        status: "Past Due",
-      },
-    ],
-  },
-  {
-    className: "Geography",
-    teacherName: "Mr. Brown",
-    assignments: [
-      {
-        id: 1,
-        name: "Assignment 1",
-        dateAssigned: "2023-10-01",
-        dateDue: "2023-10-15",
-        status: "Ungraded",
-      },
-      {
-        id: 2,
-        name: "Assignment 2",
-        dateAssigned: "2023-10-05",
-        dateDue: "2023-10-20",
-        status: "Past Due",
-      },
-    ],
-  },
-  {
-    className: "Physics",
-    teacherName: "Mr. Blue",
-    assignments: [
-      {
-        id: 1,
-        name: "Assignment 1",
-        dateAssigned: "2023-10-01",
-        dateDue: "2023-10-15",
-        status: "Ungraded",
-      },
-      {
-        id: 2,
-        name: "Assignment 2",
-        dateAssigned: "2023-10-05",
-        dateDue: "2023-10-20",
-        status: "Past Due",
-      },
-    ],
-  },
-];
 
 const DashboardStudent = () => {
+  
+  const { loading, data } = useQuery(QUERY_STUDENT_DASHBOARD);
+
+  const studentData = data?.getStudentDashboard || {};
+  const classData = studentData.classes || [];
+
+  if (!Auth.loggedIn()) {
+    return <NotLoggedIn />;
+  }
+
+  if (loading) {
+    return (
+      <h2>Loading...</h2>
+    )
+  }
+  
   return (
     <div>
       <StudentHeader />
       <div style={{ width: "75%", margin: "0 auto", marginTop: "20px" }}>
         <Card.Root>
           <Card.Header>
-            <Card.Title>Welcome, user!</Card.Title>
+            <Card.Title>Welcome, {studentData.studentName}!</Card.Title>
           </Card.Header>
           <Card.Body>
             <p>You have __ assignments due</p>
@@ -97,11 +55,21 @@ const DashboardStudent = () => {
       <div style={{ width: "75%", margin: "0 auto", marginTop: "20px" }}>
         <Heading>Your classes:</Heading>
         <Stack>
-          {classes.map((cls) => (
+          {classData.length > 0 ?
+          classData.map((cls) => (
             <div key={cls.className}>
               <StudentClassCard cls={cls} />
             </div>
-          ))}
+          )):
+          <Card.Root >
+          <Card.Header>
+            <Card.Title>You haven't joined a class yet!</Card.Title>
+          </Card.Header>
+          <Card.Body style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+            <Button colorPalette={'blue'} style={{width: '25%'}}>Join a new class</Button>
+          </Card.Body>
+          </Card.Root>
+          }
         </Stack>
       </div>
     </div>

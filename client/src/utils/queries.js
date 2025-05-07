@@ -19,6 +19,19 @@ export const QUERY_TEACHER = gql`
     }
   }
 `
+export const QUERY_TEACHER_DASHBOARD = gql`
+  query getTeacherDashBoard {
+    getTeacherDashboard {
+      teacherName
+      taughtClasses {
+        className
+        students {
+          studentName
+        }
+      }
+    }
+  }
+`
 
 // Student queries
 export const QUERY_STUDENTS = gql`
@@ -36,6 +49,25 @@ export const QUERY_STUDENT = gql`
       id
       studentEmail
       studentName
+    }
+  }
+`;
+
+export const QUERY_STUDENT_DASHBOARD = gql`
+  query getStudentDashboard {
+    getStudentDashboard {
+      studentName
+      classes {
+        className
+        teacher {
+          teacherName
+        }
+        assignments {
+          assignmentName
+          assignDateFormatted
+          dueDateFormatted
+        }
+      }
     }
   }
 `

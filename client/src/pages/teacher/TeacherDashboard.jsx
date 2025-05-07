@@ -4,36 +4,25 @@ import TeacherHeader from '../../components/teacher/header/TeacherHeader';
 import ClassCardTeacher from '../../components/teacher/dashboard/TeacherClassCard';
 import Auth from '../../utils/auth';
 import NotLoggedIn from '../../components/NotLoggedIn';
+import { QUERY_TEACHER_DASHBOARD } from '../../utils/queries';
+import { useQuery } from '@apollo/client';
 
-// Mock data for classes and students
-const classes = [
-  {
-    className: '1st Period Algebra',
-    students: [
-      { id: 1, name: 'John Doe', assignments: 5, ungraded:1, pastDue: 2 },
-      { id: 2, name: 'Jane Smith', assignments: 3, ungraded:2, pastDue: 1 },
-    ]
-  },
-  {
-    className: '2nd Period Algebra',
-    students: [
-      { id: 1, name: 'Jack Bro', assignments: 4, ungraded:3, pastDue: 3 },
-      { id: 2, name: 'Mary Dary', assignments: 5, ungraded:1, pastDue: 1 },
-    ]
-  },
-  {
-    className: '3rd Period Algebra',
-    students: [
-      { id: 1, name: 'Frank Moore', assignments: 6, ungraded:4, pastDue: 5 },
-      { id: 2, name: 'Jenny Goff', assignments: 2, ungraded:1, pastDue: 1 },
-    ]
-  }
-]
 
 const DashboardTeacher = () => {
   
+  const { loading, data } = useQuery(QUERY_TEACHER_DASHBOARD);
+
+  const teacherData = data?.getTeacherDashboard || {};
+  const classData = teacherData.taughtClasses || [];
+
   if (!Auth.loggedIn()) {
     return <NotLoggedIn />;
+  }
+
+  if (loading) {
+    return (
+      <h2>Loading...</h2>
+    )
   }
   
   return (
@@ -42,7 +31,7 @@ const DashboardTeacher = () => {
       <div style={{width: '75%', margin: '0 auto', marginTop: '40px'}}>
         <Card.Root>
           <Card.Header>
-            <Card.Title>Welcome, user!</Card.Title>
+            <Card.Title>Welcome, {teacherData.teacherName}!</Card.Title>
           </Card.Header>
           <Card.Body>
             <p>Your students have __ overdue assignments</p>
@@ -59,12 +48,20 @@ const DashboardTeacher = () => {
       <div style={{width: '75%', margin: '0 auto', marginTop: '20px'}}>
         <Heading>Your classes:</Heading>
         <Stack>
-        {/* Quadratic time */}
-        {classes.map((cls) => (
+        {classData.length > 0 ? 
+          classData.map((cls) => (
           <div key={cls.className}>
             <ClassCardTeacher cls={cls} />
           </div>
-        ))}
+        )): <Card.Root >
+          <Card.Header>
+            <Card.Title>You have no classes yet!</Card.Title>
+          </Card.Header>
+          <Card.Body style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+            <Button colorPalette={'blue'} style={{width: '25%'}}>Create a new class</Button>
+          </Card.Body>
+          </Card.Root>
+        }
         </Stack>
       </div>
 

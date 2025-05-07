@@ -40,6 +40,27 @@ const resolvers = {
         ],
       });
     },
+    getTeacherDashboard: async (_parent, _args, context) => {
+      console.log(context.user);
+      if (context.user.teacherEmail) {
+        const teacher = await Teacher.findOne({
+          where: { teacherEmail: context.user.teacherEmail },
+          include: [
+            {
+              model: Class,
+              as: "taughtClasses",
+              include: [
+                {
+                  model: Student,
+                  as: "students",
+                },
+              ],
+            },
+          ],
+        });
+        return teacher;
+      }
+    },
     getAllStudents: async () => {
       return await Student.findAll({
         include: [
@@ -51,6 +72,10 @@ const resolvers = {
                 model: Teacher,
                 as: "teacher",
               },
+              {
+                model: Assignment,
+                as: "assignments",
+              }
             ],
           },
         ],
@@ -72,6 +97,30 @@ const resolvers = {
           },
         ],
       });
+    },
+    getStudentDashboard: async (_parent, _args, context) => {
+      if (context.user.studentEmail) {
+        const student = await Student.findOne({
+          where: { studentEmail: context.user.studentEmail },
+          include: [
+            {
+              model: Class,
+              as: "classes",
+              include: [
+                {
+                  model: Teacher,
+                  as: "teacher",
+                },
+                {
+                  model: Assignment,
+                  as: "assignments",
+                },
+              ],
+            }
+          ],
+        });
+        return student;
+      }
     },
     getAllAssignments: async () => {
       return await Assignment.findAll({
@@ -113,6 +162,10 @@ const resolvers = {
             model: Student,
             as: "students",
           },
+          {
+            model: Assignment,
+            as: "assignments",
+          }
         ],
       });
     },
@@ -127,6 +180,10 @@ const resolvers = {
           {
             model: Student,
             as: "students",
+          },
+          {
+            model: Assignment,
+            as: "assignments",
           },
         ],
       });

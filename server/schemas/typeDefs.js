@@ -21,7 +21,9 @@ const typeDefs = `
     assignmentName: String!
     assignmentDescription: String!
     assignDate: String!
+    assignDateFormatted: String
     dueDate: String!
+    dueDateFormatted: String
     class: Class
     studentsWithSubmissions: [Student]
   }
@@ -47,8 +49,10 @@ const typeDefs = `
   type Query {
     getAllTeachers: [Teacher]
     getTeacher(id: ID!): Teacher
+    getTeacherDashboard: Teacher
     getAllStudents: [Student]
     getStudent(id: ID!): Student
+    getStudentDashboard: Student
     getAllAssignments: [Assignment]
     getAssignment(id: ID!): Assignment
     getAllClasses: [Class]

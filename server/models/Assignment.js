@@ -1,5 +1,6 @@
 const {  DataTypes, Model } = require('sequelize');
 const { sequelize } = require('../config/connection');
+const moment = require('moment');
 
 class Assignment extends Model {}
 
@@ -29,6 +30,20 @@ Assignment.init(
     }
   }, 
   {
+    getterMethods: {
+      assignDateFormatted() {
+        if (this.assignDate) {
+          return moment(this.assignDate).format('MM/DD/YYYY');
+        }
+        return null;
+      },
+      dueDateFormatted() {
+        if (this.dueDate) {
+          return moment(this.dueDate).format('MM/DD/YYYY');
+        }
+        return null;
+      },
+    },
     sequelize,
     modelName: 'Assignment',
     timestamps: true,
