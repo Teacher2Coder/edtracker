@@ -4,6 +4,7 @@ const typeDefs = `
     teacherName: String!
     teacherEmail: String!
     teacherPassword: String!
+    teacherBio: String
     taughtClasses: [Class]
   }
   
@@ -12,6 +13,7 @@ const typeDefs = `
     studentName: String!
     studentEmail: String!
     studentPassword: String!
+    studentBio: String
     classes: [Class]
     assignments: [Assignment]
   }
@@ -50,9 +52,11 @@ const typeDefs = `
     getAllTeachers: [Teacher]
     getTeacher(id: ID!): Teacher
     getTeacherDashboard: Teacher
+    getTeacherMeProfile: Teacher
     getAllStudents: [Student]
     getStudent(id: ID!): Student
     getStudentDashboard: Student
+    getStudentMeProfile: Student
     getAllAssignments: [Assignment]
     getAssignment(id: ID!): Assignment
     getAllClasses: [Class]

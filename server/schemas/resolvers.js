@@ -41,7 +41,26 @@ const resolvers = {
       });
     },
     getTeacherDashboard: async (_parent, _args, context) => {
-      console.log(context.user);
+      if (context.user.teacherEmail) {
+        const teacher = await Teacher.findOne({
+          where: { teacherEmail: context.user.teacherEmail },
+          include: [
+            {
+              model: Class,
+              as: "taughtClasses",
+              include: [
+                {
+                  model: Student,
+                  as: "students",
+                },
+              ],
+            },
+          ],
+        });
+        return teacher;
+      }
+    },
+    getTeacherMeProfile: async (_parent, _args, context) => {
       if (context.user.teacherEmail) {
         const teacher = await Teacher.findOne({
           where: { teacherEmail: context.user.teacherEmail },
@@ -120,6 +139,26 @@ const resolvers = {
           ],
         });
         return student;
+      }
+    },
+    getStudentMeProfile: async (_parent, _args, context) => {
+      if (context.user.studentEmail) {
+        const teacher = await Teacher.findOne({
+          where: { teacherEmail: context.user.studentEmail },
+          include: [
+            {
+              model: Class,
+              as: "classes",
+              include: [
+                {
+                  model: Teacher,
+                  as: "teacher",
+                }
+              ],
+            },
+          ],
+        });
+        return teacher;
       }
     },
     getAllAssignments: async () => {
@@ -215,7 +254,6 @@ const resolvers = {
         teacherEmail,
         teacherPassword,
       });
-      console.log(teacher);
       const token = signTokenTeacher(teacher);
       return { token, teacher };
     },

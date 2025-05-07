@@ -5,25 +5,28 @@ import TeacherEditProfileModal from "./TeacherEditProfileModal";
 import TeacherSignoutModal from "./TeacherSignoutModal";
 
 const TeacherProfileCard = ({ teacher }) => {
+  
+  console.log(teacher);
+
   return (
     <div style={{ width: "75%", margin: "0 auto", marginTop: "20px" }}>
       <Card.Root>
         <Card.Header style={{ display: "flex", flexDirection: "row" }}>
           <Image
-            src={teacher.profilePicture || "https://via.placeholder.com/150"}
-            alt={`${teacher.name}'s profile`}
+            src={"https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"}
+            alt={`${teacher.teacherName}'s profile`}
             borderRadius="full"
             boxSize="150px"
             objectFit="cover"
           />
-          <Card.Title style={{ marginLeft: "5%" }}>{teacher.name}</Card.Title>
+          <Card.Title style={{ marginLeft: "5%" }}>{teacher.teacherName}</Card.Title>
         </Card.Header>
         <Card.Body>
           <p>
-            <strong>Contact:</strong> {teacher.email}
+            <strong>Contact:</strong> {teacher.teacherEmail}
           </p>
           <p>
-            <strong>Bio:</strong> {teacher.bio}
+            <strong>Bio:</strong> {teacher.teacherBio}
           </p>
         </Card.Body>
         <Card.Footer>

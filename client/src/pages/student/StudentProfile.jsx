@@ -5,18 +5,23 @@ import StudentProfileCard from '../../components/student/profile/StudentProfileC
 import Auth from '../../utils/auth';
 import NotLoggedIn from '../../components/NotLoggedIn';
 
+import { useQuery } from '@apollo/client';
+import { QUERY_STUDENT_ME_PROFILE } from '../../utils/queries';
+
 
 const StudentProfile = () => {
   
-  const student = {
-    profilePicture: 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png',
-    name: 'John Doe',
-    email: 'john.doe@gmail.com',
-    bio: 'A passionate learner and aspiring software developer.',
-  }
+  const { loading, data } = useQuery(QUERY_STUDENT_ME_PROFILE);
+  const studentData = data?.getStudentMeProfile || {};
 
   if (!Auth.loggedIn()) {
     return <NotLoggedIn />;
+  }
+
+  if (loading) {
+    return (
+      <h2>Loading...</h2>
+    )
   }
   
   return (
@@ -28,7 +33,7 @@ const StudentProfile = () => {
       >
         Student Profile
       </Heading>
-      <StudentProfileCard student={student} />
+      <StudentProfileCard student={studentData} />
     </div>
   );
 }

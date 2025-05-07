@@ -36,7 +36,6 @@ const LoginTeacher = () => {
         const { data } = await loginTeacher({
           variables: { teacherEmail, teacherPassword }
         });
-        console.log(data);
         Auth.login(data.loginTeacher.token);
         window.location.assign('/teacher/dashboard');
       } catch (e) {

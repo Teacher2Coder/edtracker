@@ -29,6 +29,10 @@ Teacher.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    teacherBio: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+    },
   }, 
   {
     hooks: {

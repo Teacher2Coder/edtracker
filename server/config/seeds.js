@@ -38,11 +38,13 @@ const createTeachers = async () => {
     const teacherName = generateRandomName();
     const teacherEmail = generateRandomEmail(teacherName);
     const teacherPassword = 'password123';
+    const teacherBio = `This is a bio for ${teacherName}.`;
 
     const teacher = {
       teacherName,
       teacherEmail,
       teacherPassword,
+      teacherBio
     }
 
     teachers.push(teacher);
@@ -57,11 +59,13 @@ const createStudents = async () => {
     const studentName = generateRandomName();
     const studentEmail = generateRandomEmail(studentName);
     const studentPassword = 'password123';
+    const studentBio = `This is a bio for ${studentName}.`;
 
     const student = {
       studentName,
       studentEmail,
       studentPassword,
+      studentBio
     }
 
     students.push(student);

@@ -10,8 +10,8 @@ const StudentProfileCard = ({ student }) => {
       <Card.Root>
         <Card.Header style={{ display: "flex", flexDirection: "row" }}>
           <Image
-            src={student.profilePicture || "https://via.placeholder.com/150"}
-            alt={`${student.name}'s profile`}
+            src={"https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"}
+            alt={`${student.studentName}'s profile`}
             borderRadius="full"
             boxSize="150px"
             objectFit="cover"
@@ -20,10 +20,10 @@ const StudentProfileCard = ({ student }) => {
         </Card.Header>
         <Card.Body>
           <p>
-            <strong>Contact:</strong> {student.email}
+            <strong>Contact:</strong> {student.studentEmail}
           </p>
           <p>
-            <strong>Bio:</strong> {student.bio}
+            <strong>Bio:</strong> {student.studentBio}
           </p>
         </Card.Body>
         <Card.Footer>

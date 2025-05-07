@@ -6,18 +6,24 @@ import TeacherProfileCard from '../../components/teacher/profile/TeacherProfileC
 import Auth from '../../utils/auth';
 import NotLoggedIn from '../../components/NotLoggedIn';
 
+import { useQuery } from '@apollo/client';
+import { QUERY_TEACHER_ME_PROFILE } from '../../utils/queries';
+
 
 const TeacherProfile = () => {
   
+  const { loading, data } = useQuery(QUERY_TEACHER_ME_PROFILE);
+  const teacherData = data?.getTeacherMeProfile || {};
+
+
   if (!Auth.loggedIn()) {
     return <NotLoggedIn />;
   }
 
-  const teacher = {
-    profilePicture: 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png',
-    name: 'John Doe',
-    email: 'john.doe@gmail.com',
-    bio: 'A passionate educator and aspiring software developer.',
+  if (loading) {
+    return (
+      <h2>Loading...</h2>
+    )
   }
   
   return (
@@ -29,7 +35,7 @@ const TeacherProfile = () => {
       >
         Teacher Profile
       </Heading>
-      <TeacherProfileCard teacher={teacher} />
+      <TeacherProfileCard teacher={teacherData} />
     </div>
   );
 }

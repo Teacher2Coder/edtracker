@@ -29,6 +29,10 @@ Student.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    studentBio: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+    },
   }, 
   {
     hooks: {

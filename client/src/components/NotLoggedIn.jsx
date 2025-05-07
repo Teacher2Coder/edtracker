@@ -16,8 +16,17 @@ const NotLoggedIn = () => {
                 flexWrap: "wrap",
               }}
             >
-              <Link to="/">
-                <Button>Go to Login</Button>
+              <Link to="/teacher/login">
+                <Button>Login as a Teacher</Button>
+              </Link>
+              <Link to="/teacher/signup">
+                <Button>Sign up as a Teacher</Button>
+              </Link>
+              <Link to="/student/login">
+                <Button>Login as a Student</Button>
+              </Link>
+              <Link to="/student/signup">
+                <Button>Sign up as a Student</Button>
               </Link>
             </div>
           </div>

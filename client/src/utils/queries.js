@@ -18,7 +18,7 @@ export const QUERY_TEACHER = gql`
       teacherName
     }
   }
-`
+`;
 export const QUERY_TEACHER_DASHBOARD = gql`
   query getTeacherDashBoard {
     getTeacherDashboard {
@@ -31,7 +31,21 @@ export const QUERY_TEACHER_DASHBOARD = gql`
       }
     }
   }
-`
+`;
+
+export const QUERY_TEACHER_ME_PROFILE = gql`
+  query getTeacherMeProfile {
+    getTeacherMeProfile {
+      teacherName
+      teacherEmail
+      teacherBio
+      taughtClasses {
+        className
+        classId
+      }
+    }
+  }
+`;
 
 // Student queries
 export const QUERY_STUDENTS = gql`
@@ -70,7 +84,23 @@ export const QUERY_STUDENT_DASHBOARD = gql`
       }
     }
   }
-`
+`;
+
+export const QUERY_STUDENT_ME_PROFILE = gql`
+  query getTeacherMeProfile {
+    getStudentMeProfile {
+      studentName
+      studentEmail
+      studentBio
+      classes {
+        className
+        teacher {
+          teacherName
+        }
+      }
+    }
+  }
+`;
 
 // Class queries
 export const QUERY_CLASSES = gql`

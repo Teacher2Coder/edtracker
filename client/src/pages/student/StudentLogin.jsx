@@ -36,7 +36,6 @@ const LoginStudent = () => {
         const { data } = await loginStudent({
           variables: { studentEmail, studentPassword }
         });
-        console.log(data);
         Auth.login(data.loginStudent.token);
         window.location.assign('/student/dashboard');
       } catch (e) {
