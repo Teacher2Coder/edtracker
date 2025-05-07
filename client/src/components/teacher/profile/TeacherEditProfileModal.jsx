@@ -1,10 +1,10 @@
-import { Button, CloseButton, Dialog, Portal } from "@chakra-ui/react"
+import { Button, CloseButton, Dialog, Portal } from "@chakra-ui/react";
 
 import TeacherEditProfileForm from "./TeacherEditProfileForm";
 
 const TeacherEditProfileModal = () => {
   return (
-    <Dialog.Root size='xl'>
+    <Dialog.Root size="xl">
       <Dialog.Trigger asChild>
         <Button variant="outline" size="lg">
           Edit Profile
@@ -22,7 +22,9 @@ const TeacherEditProfileModal = () => {
             </Dialog.Body>
             <Dialog.Footer>
               <Dialog.ActionTrigger asChild>
-                <Button colorPalette={'blue'} variant="outline">Cancel</Button>
+                <Button colorPalette={"blue"} variant="outline">
+                  Cancel
+                </Button>
               </Dialog.ActionTrigger>
             </Dialog.Footer>
             <Dialog.CloseTrigger asChild>
@@ -32,7 +34,7 @@ const TeacherEditProfileModal = () => {
         </Dialog.Positioner>
       </Portal>
     </Dialog.Root>
-  )
-}
+  );
+};
 
 export default TeacherEditProfileModal;

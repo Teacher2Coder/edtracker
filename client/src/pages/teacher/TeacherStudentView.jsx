@@ -1,6 +1,13 @@
 import TeacherHeader from '../../components/teacher/header/TeacherHeader';
+import Auth from '../../utils/auth';
+import NotLoggedIn from '../../components/NotLoggedIn';
 
 const TeacherStudentView = () => {
+  
+  if (!Auth.loggedIn()) {
+    return <NotLoggedIn />;
+  }
+  
   return (
     <div>
       <TeacherHeader />

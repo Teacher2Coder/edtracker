@@ -16,11 +16,8 @@ const NotLoggedIn = () => {
                 flexWrap: "wrap",
               }}
             >
-              <Link to="/login">
+              <Link to="/">
                 <Button>Go to Login</Button>
-              </Link>
-              <Link to="/signup">
-                <Button>Go to Signup</Button>
               </Link>
             </div>
           </div>
@@ -28,6 +25,6 @@ const NotLoggedIn = () => {
       </Card.Root>
     </div>
   );
-}
+};
 
 export default NotLoggedIn;

@@ -8,15 +8,15 @@ const TeacherProfileCard = ({ teacher }) => {
   return (
     <div style={{ width: "75%", margin: "0 auto", marginTop: "20px" }}>
       <Card.Root>
-        <Card.Header style={{ display: 'flex', flexDirection: 'row'}}>
-        <Image
+        <Card.Header style={{ display: "flex", flexDirection: "row" }}>
+          <Image
             src={teacher.profilePicture || "https://via.placeholder.com/150"}
             alt={`${teacher.name}'s profile`}
             borderRadius="full"
             boxSize="150px"
             objectFit="cover"
           />
-          <Card.Title style={{ marginLeft: '5%' }}>{teacher.name}</Card.Title>
+          <Card.Title style={{ marginLeft: "5%" }}>{teacher.name}</Card.Title>
         </Card.Header>
         <Card.Body>
           <p>

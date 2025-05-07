@@ -1,7 +1,7 @@
 import { Button, CloseButton, Dialog, Portal } from "@chakra-ui/react";
 import Auth from "../../../utils/auth";
 
-const TeacherSignoutModal = () => {
+const StudentSignoutModal = () => {
   const handleSignOut = () => {
     Auth.logout();
   };
@@ -18,7 +18,7 @@ const TeacherSignoutModal = () => {
         <Dialog.Positioner>
           <Dialog.Content>
             <Dialog.Header>
-              <Dialog.Title>Teacher Sign Out</Dialog.Title>
+              <Dialog.Title>Student Sign Out</Dialog.Title>
             </Dialog.Header>
             <Dialog.Body>Are you sure you want to sign out?</Dialog.Body>
             <Dialog.Footer>
@@ -43,4 +43,4 @@ const TeacherSignoutModal = () => {
   );
 };
 
-export default TeacherSignoutModal;
+export default StudentSignoutModal;

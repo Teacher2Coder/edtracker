@@ -1,8 +1,13 @@
 import TeacherHeader from '../../components/teacher/header/TeacherHeader';
-
-import useFetch from '../../utils/useFetch';
+import Auth from '../../utils/auth';
+import NotLoggedIn from '../../components/NotLoggedIn';
 
 const TeacherClassView = () => {
+  
+  if (!Auth.loggedIn()) {
+    return <NotLoggedIn />;
+  }
+
   return (
     <div>
       <TeacherHeader />

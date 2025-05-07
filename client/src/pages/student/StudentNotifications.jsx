@@ -3,6 +3,9 @@ import { Heading, Stack } from "@chakra-ui/react";
 import StudentHeader from "../../components/student/header/StudentHeader";
 import StudentNotificationCard from "../../components/student/notifications/StudentNotificationCard";
 
+import Auth from "../../utils/auth";
+import NotLoggedIn from "../../components/NotLoggedIn";
+
 // Mock Notification Data
 const notifications = [
   {
@@ -23,6 +26,11 @@ const notifications = [
 ];
 
 const StudentNotifications = () => {
+  
+  if (!Auth.loggedIn()) {
+    return <NotLoggedIn />;
+  }
+  
   return (
     <div>
       <StudentHeader />

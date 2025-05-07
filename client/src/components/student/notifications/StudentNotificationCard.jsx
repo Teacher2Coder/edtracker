@@ -10,12 +10,18 @@ const StudentNotificationCard = ({ notification }) => {
         <p>{notification.message}</p>
       </Card.Body>
       <Card.Footer>
-        <div style={{ display: "flex", flexDirection: "row", justifyContent: "flex-end" }}>
-          <Button colorPalette={'blue'}>Acknowledge</Button>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "flex-end",
+          }}
+        >
+          <Button colorPalette={"blue"}>Acknowledge</Button>
         </div>
       </Card.Footer>
     </Card.Root>
-  )
-}
+  );
+};
 
 export default StudentNotificationCard;

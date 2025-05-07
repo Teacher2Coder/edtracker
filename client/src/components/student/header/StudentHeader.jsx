@@ -127,7 +127,7 @@ const NavBarContainer = ({ children, ...props }) => {
       mb={8}
       p={8}
       bg={"blue.600"}
-      color={["white", "white", "primary.700", "primary.700"]}
+      color={{ base: "white", md: "primary.700" }}
       {...props}
     >
       {children}

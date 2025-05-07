@@ -1,7 +1,6 @@
 import { Table, Card, Button } from "@chakra-ui/react";
 
 const ClassCardTeacher = ({ cls }) => {
-
   // Destructure the class object to get the students
   const students = cls.students || [];
 
@@ -15,8 +14,12 @@ const ClassCardTeacher = ({ cls }) => {
           <Table.Header>
             <Table.Row>
               <Table.ColumnHeader>Student</Table.ColumnHeader>
-              <Table.ColumnHeader textAlign="center">Assignments</Table.ColumnHeader>
-              <Table.ColumnHeader textAlign="center">Ungraded</Table.ColumnHeader>
+              <Table.ColumnHeader textAlign="center">
+                Assignments
+              </Table.ColumnHeader>
+              <Table.ColumnHeader textAlign="center">
+                Ungraded
+              </Table.ColumnHeader>
               <Table.ColumnHeader textAlign="end">Past Due</Table.ColumnHeader>
             </Table.Row>
           </Table.Header>

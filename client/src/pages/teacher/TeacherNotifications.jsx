@@ -3,7 +3,8 @@ import { Heading, Stack } from "@chakra-ui/react";
 import TeacherHeader from '../../components/teacher/header/TeacherHeader';
 import TeacherNotificationCard from "../../components/teacher/notifications/TeacherNotificationCard";
 
-import useFetch from '../../utils/useFetch';
+import Auth from '../../utils/auth';
+import NotLoggedIn from '../../components/NotLoggedIn';
 
 // Mock Notification Data
 const notifications = [
@@ -25,6 +26,11 @@ const notifications = [
 ];
 
 const TeacherNotifications = () => {
+  
+  if (!Auth.loggedIn()) {
+    return <NotLoggedIn />;
+  }
+  
   return (
     <div>
       <TeacherHeader />

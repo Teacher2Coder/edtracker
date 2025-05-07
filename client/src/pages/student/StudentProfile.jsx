@@ -2,6 +2,8 @@ import { Heading } from '@chakra-ui/react'
 
 import StudentHeader from '../../components/student/header/StudentHeader';
 import StudentProfileCard from '../../components/student/profile/StudentProfileCard';
+import Auth from '../../utils/auth';
+import NotLoggedIn from '../../components/NotLoggedIn';
 
 
 const StudentProfile = () => {
@@ -11,6 +13,10 @@ const StudentProfile = () => {
     name: 'John Doe',
     email: 'john.doe@gmail.com',
     bio: 'A passionate learner and aspiring software developer.',
+  }
+
+  if (!Auth.loggedIn()) {
+    return <NotLoggedIn />;
   }
   
   return (
