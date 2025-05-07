@@ -1,28 +1,28 @@
 const { DataTypes, Model } = require('sequelize');
 const { sequelize } = require('../config/connection');
 
-class Class extends Model {}
+class Submission extends Model {}
 
-Class.init(
+Submission.init(
   {
-    classId: {
+    submissionId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
       autoIncrement: true,
     },
-    className: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-  }, 
+    grade: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    }
+  },
   {
     sequelize,
-    modelName: 'class',
+    modelName: 'submission',
     timestamps: true,
     freezeTableName: true,
     underscored: true,
   }
 );
 
-module.exports = Class;
+module.exports = Submission;

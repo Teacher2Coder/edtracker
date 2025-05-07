@@ -10,7 +10,7 @@ class Student extends Model {
 
 Student.init(
   {
-    id: {
+    studentId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,

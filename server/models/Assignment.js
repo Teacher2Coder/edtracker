@@ -5,7 +5,7 @@ class Assignment extends Model {}
 
 Assignment.init(
   {
-    id: {
+    assignmentId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,

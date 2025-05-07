@@ -31,7 +31,7 @@ const generateRandomAssignmentName = () => {
 }
 
 
-// Create a array of Teachers
+// Create a array of Teachers for seeding
 const createTeachers = async () => {
   const teachers = [];
   for (let i = 0; i < 10; i++) {
@@ -50,7 +50,7 @@ const createTeachers = async () => {
   return teachers;
 }
 
-// Create an array of Students
+// Create an array of Students for seeding
 const createStudents = async () => {
   const students = [];
   for (let i = 0; i < 10; i++) {
@@ -69,7 +69,7 @@ const createStudents = async () => {
   return students;
 }
 
-// Create an array of Classes
+// Create an array of Classes for seeding
 const createClasses = async (teachers) => {
   const classes = [];
   for (let i = 0; i < teachers.length; i++) {
@@ -79,13 +79,14 @@ const createClasses = async (teachers) => {
     const generatedClassName = `${teacherName}'s ${randomClassName} class`;
     const generatedClass = {
       className: generatedClassName,
+      teacherId: i + 1,
     }
     classes.push(generatedClass);
   }
   return classes;
 }
 
-// Create an array of Assignments
+// Create an array of Assignments for seeding
 const createAssignments = async () => {
   const assignments = [];
   for (let i = 0; i < 20; i++) {
@@ -102,8 +103,8 @@ const createAssignments = async () => {
   return assignments;
 }
 
-// Create all teachers
-const createAllTeachers = async (teachers) => {
+// Seed all teachers
+const seedTeachers = async (teachers) => {
   for (let i = 0; i < teachers.length; i++) {
     const teacher = teachers[i];
     try {
@@ -114,14 +115,54 @@ const createAllTeachers = async (teachers) => {
   }
 }
 
-// Create all students
-const createAllStudents = async (students) => {
+// Seed all students
+const seedStudents = async (students) => {
   for (let i = 0; i < students.length; i++) {
     const student = students[i];
     try {
       await Student.create(student);
     } catch (error) {
       console.error("Error creating student:", error);
+    }
+  }
+}
+
+// Seed all classes
+const seedClasses = async (classes) => {
+  const students = await Student.findAll();
+
+  for (let i = 0; i < classes.length; i++) {
+    const classData = classes[i];
+    try {
+      const classObj = await Class.create(classData);
+      const randomStudentCount = Math.floor(Math.random() * students.length) + 1;
+      const randomStudents = students.sort(() => 0.5 - Math.random()).slice(0, randomStudentCount);
+      for (let j = 0; j < randomStudents.length; j++) {
+        const student = randomStudents[j];
+        await classObj.addStudent(student);
+      }
+    } catch (error) {
+      console.error("Error creating class:", error);
+    }
+  }
+}
+
+// Seed all assignments
+const seedAssignments = async (assignments) => {
+  for (let i = 0; i < assignments.length; i++) {
+    const assignment = assignments[i];
+    try {
+      const createdAssignment = await Assignment.create(assignment);
+      createdAssignment.setClass(Math.floor(Math.random() * 10) + 1); // Randomly assign to a class
+      const students = await Student.findAll();
+      const randomStudentCount = Math.floor(Math.random() * students.length) + 1;
+      const randomStudents = students.sort(() => 0.5 - Math.random()).slice(0, randomStudentCount);
+      for (let j = 0; j < randomStudents.length; j++) {
+        const student = randomStudents[j];
+        await createdAssignment.addStudent(student);
+      }
+    } catch (error) {
+      console.error("Error creating assignment:", error);
     }
   }
 }
@@ -133,10 +174,10 @@ const seedData = async () => {
   const classes = await createClasses(teachers);
   const assignments = await createAssignments();
   try {
-    await createAllTeachers(teachers);
-    await createAllStudents(students);
-    await Class.bulkCreate(classes);
-    await Assignment.bulkCreate(assignments);
+    await seedTeachers(teachers);
+    await seedStudents(students);
+    await seedClasses(classes);
+    await seedAssignments(assignments);
   } catch (error) {
     console.error("Error seeding data:", error);
   }
@@ -154,11 +195,10 @@ const handleSeedDatabase = async () => {
     const endTime = performance.now();
     const totalTime = endTime - startTime;
     console.log('----------------------------------------');
-    console.log(`Seeding completed in ${totalTime/1000} seconds`);
+    console.log(`Process completed in ${totalTime/1000} seconds`);
     process.exit(0);
   }
 };
 
 // Execute the seed function
-
 handleSeedDatabase();

@@ -1,31 +1,135 @@
-const { Teacher, Student, Class, Assignment } = require('../models');
-const { signTokenTeacher, signTokenStudent, AuthenticationError } = require('../utils/auth');
+const { Teacher, Student, Class, Assignment } = require("../models");
+const {
+  signTokenTeacher,
+  signTokenStudent,
+  AuthenticationError,
+} = require("../utils/auth");
 
 const resolvers = {
   Query: {
     getAllTeachers: async () => {
-      return await Teacher.findAll();
+      return await Teacher.findAll({
+        include: [
+          {
+            model: Class,
+            as: "taughtClasses",
+            include: [
+              {
+                model: Student,
+                as: "students",
+              },
+            ],
+          },
+        ],
+      });
     },
     getTeacher: async (_, { id }) => {
-      return await Teacher.findOne({ where: { id: id } });
+      return await Teacher.findOne({
+        where: { teacherId: id },
+        include: [
+          {
+            model: Class,
+            as: "classes",
+            include: [
+              {
+                model: Student,
+                as: "students",
+              },
+            ],
+          },
+        ],
+      });
     },
     getAllStudents: async () => {
-      return await Student.findAll();
+      return await Student.findAll({
+        include: [
+          {
+            model: Class,
+            as: "classes",
+            include: [
+              {
+                model: Teacher,
+                as: "teacher",
+              },
+            ],
+          },
+        ],
+      });
     },
     getStudent: async (_, { id }) => {
-      return await Student.findOne({ where: { id: id } });
+      return await Student.findOne({
+        where: { studentId: id },
+        include: [
+          {
+            model: Class,
+            as: "classes",
+            include: [
+              {
+                model: Teacher,
+                as: "teacher",
+              },
+            ],
+          },
+        ],
+      });
     },
     getAllAssignments: async () => {
-      return await Assignment.findAll();
+      return await Assignment.findAll({
+        include: [
+          {
+            model: Class,
+            as: "class",
+          },
+          {
+            model: Student,
+            as: "students",
+          },
+        ],
+      });
     },
     getAssignment: async (_, { id }) => {
-      return await Assignment.findOne({ where: { id: id } });
+      return await Assignment.findOne({
+        where: { assignmentId: id },
+        include: [
+          {
+            model: Class,
+            as: "class",
+          },
+          {
+            model: Student,
+            as: "studentsWithSubmissions",
+          },
+        ],
+      });
     },
     getAllClasses: async () => {
-      return await Class.findAll();
+      return await Class.findAll({
+        include: [
+          {
+            model: Teacher,
+            as: "teacher",
+          },
+          {
+            model: Student,
+            as: "students",
+          },
+        ],
+      });
     },
     getClass: async (_, { id }) => {
-      return await Class.findOne({ where: { id: id } });
+      return await Class.findOne({
+        where: { classId: id },
+        include: [
+          {
+            model: Teacher,
+            as: "teacher",
+          },
+          {
+            model: Student,
+            as: "students",
+          },
+        ],
+      });
     },
   },
 
@@ -34,29 +138,38 @@ const resolvers = {
       const teacher = await Teacher.findOne({ where: { teacherEmail } });
 
       if (!teacher) {
-        throw new AuthenticationError('No teacher found with this email address');
+        throw new AuthenticationError(
+          "No teacher found with this email address"
+        );
       }
 
       const correctPw = teacher.checkPassword(teacherPassword);
 
       if (!correctPw) {
-        throw new AuthenticationError('Incorrect password');
+        throw new AuthenticationError("Incorrect password");
       }
 
       const token = signTokenTeacher(teacher);
       return { token, teacher };
     },
     addTeacher: async (_, { teacherName, teacherEmail, teacherPassword }) => {
-      const teacher = await Teacher.create({ teacherName, teacherEmail, teacherPassword });
+      const teacher = await Teacher.create({
+        teacherName,
+        teacherEmail,
+        teacherPassword,
+      });
       console.log(teacher);
       const token = signTokenTeacher(teacher);
       return { token, teacher };
     },
-    editTeacher: async (_, { id, teacherName, teacherEmail, teacherPassword }) => {
-      const teacher = await Teacher.findOne({ where: { id: id } });
+    editTeacher: async (
+      _,
+      { id, teacherName, teacherEmail, teacherPassword }
+    ) => {
+      const teacher = await Teacher.findOne({ where: { teacherId: id } });
 
       if (!teacher) {
-        throw new AuthenticationError('No teacher found with this ID');
+        throw new AuthenticationError("No teacher found with this ID");
       }
 
       teacher.teacherName = teacherName;
@@ -66,10 +179,10 @@ const resolvers = {
       return await teacher.save();
     },
     deleteTeacher: async (_, { id }) => {
-      const teacher = await Teacher.findOne({ where: { id: id } });
+      const teacher = await Teacher.findOne({ where: { teacherId: id } });
 
       if (!teacher) {
-        throw new AuthenticationError('No teacher found with this ID');
+        throw new AuthenticationError("No teacher found with this ID");
       }
 
       await teacher.destroy();
@@ -79,28 +192,37 @@ const resolvers = {
       const student = await Student.findOne({ where: { studentEmail } });
 
       if (!student) {
-        throw new AuthenticationError('No student found with this email address');
+        throw new AuthenticationError(
+          "No student found with this email address"
+        );
       }
 
       const correctPw = student.checkPassword(studentPassword);
 
       if (!correctPw) {
-        throw new AuthenticationError('Incorrect password');
+        throw new AuthenticationError("Incorrect password");
       }
 
       const token = signTokenStudent(student);
       return { token, student };
     },
     addStudent: async (_, { studentName, studentEmail, studentPassword }) => {
-      const student = await Student.create({ studentName, studentEmail, studentPassword });
+      const student = await Student.create({
+        studentName,
+        studentEmail,
+        studentPassword,
+      });
       const token = signTokenStudent(student);
       return { token, student };
     },
-    editStudent: async (_, { id, studentName, studentEmail, studentPassword }) => {
-      const student = await Student.findOne({ where: { id: id } });
+    editStudent: async (
+      _,
+      { id, studentName, studentEmail, studentPassword }
+    ) => {
+      const student = await Student.findOne({ where: { studentId: id } });
 
       if (!student) {
-        throw new AuthenticationError('No student found with this ID');
+        throw new AuthenticationError("No student found with this ID");
       }
 
       student.studentName = studentName;
@@ -110,24 +232,37 @@ const resolvers = {
       return await student.save();
     },
     deleteStudent: async (_, { id }) => {
-      const student = await Student.findOne({ where: { id: id } });
+      const student = await Student.findOne({ where: { studentId: id } });
 
       if (!student) {
-        throw new AuthenticationError('No student found with this ID');
+        throw new AuthenticationError("No student found with this ID");
       }
 
       await student.destroy();
       return student;
     },
-    addAssignment: async (_, { assignmentName, assignmentDescription, assignDate, dueDate }) => {
-      const newAssignment = new Assignment({ assignmentName, assignmentDescription, assignDate, dueDate });
+    addAssignment: async (
+      _,
+      { assignmentName, assignmentDescription, assignDate, dueDate }
+    ) => {
+      const newAssignment = new Assignment({
+        assignmentName,
+        assignmentDescription,
+        assignDate,
+        dueDate,
+      });
       return await newAssignment.save();
     },
-    editAssignment: async (_, { id, assignmentName, assignmentDescription, assignDate, dueDate }) => {
-      const assignment = await Assignment.findOne({ where: { id: id } });
+    editAssignment: async (
+      _,
+      { id, assignmentName, assignmentDescription, assignDate, dueDate }
+    ) => {
+      const assignment = await Assignment.findOne({
+        where: { assignmentId: id },
+      });
 
       if (!assignment) {
-        throw new AuthenticationError('No assignment found with this ID');
+        throw new AuthenticationError("No assignment found with this ID");
       }
 
       assignment.assignmentName = assignmentName;
@@ -138,10 +273,12 @@ const resolvers = {
       return await assignment.save();
     },
     deleteAssignment: async (_, { id }) => {
-      const assignment = await Assignment.findOne({ where: { id: id } });
+      const assignment = await Assignment.findOne({
+        where: { assignmentId: id },
+      });
 
       if (!assignment) {
-        throw new AuthenticationError('No assignment found with this ID');
+        throw new AuthenticationError("No assignment found with this ID");
       }
 
       await assignment.destroy();
@@ -152,10 +289,10 @@ const resolvers = {
       return await newClass.save();
     },
     editClass: async (_, { id, className }) => {
-      const classObj = await Class.findOne({ where: { id: id } });
+      const classObj = await Class.findOne({ where: { classId: id } });
 
       if (!classObj) {
-        throw new AuthenticationError('No class found with this ID');
+        throw new AuthenticationError("No class found with this ID");
       }
 
       classObj.className = className;
@@ -163,16 +300,16 @@ const resolvers = {
       return await classObj.save();
     },
     deleteClass: async (_, { id }) => {
-      const classObj = await Class.findOne({ where: { id: id } });
+      const classObj = await Class.findOne({ where: { classId: id } });
 
       if (!classObj) {
-        throw new AuthenticationError('No class found with this ID');
+        throw new AuthenticationError("No class found with this ID");
       }
 
       await classObj.destroy();
       return classObj;
     },
-  }
+  },
 };
 
 module.exports = resolvers;

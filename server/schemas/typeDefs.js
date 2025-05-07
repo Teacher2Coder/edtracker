@@ -1,29 +1,37 @@
 const typeDefs = `
   type Teacher {
-    id: ID!
+    teacherId: ID!
     teacherName: String!
     teacherEmail: String!
     teacherPassword: String!
+    taughtClasses: [Class]
   }
   
   type Student {
-    id: ID!
+    studentId: ID!
     studentName: String!
     studentEmail: String!
     studentPassword: String!
+    classes: [Class]
+    assignments: [Assignment]
   }
 
   type Assignment {
-    id: ID!
+    assignmentId: ID!
     assignmentName: String!
     assignmentDescription: String!
     assignDate: String!
     dueDate: String!
+    class: Class
+    studentsWithSubmissions: [Student]
   }
 
   type Class {
-    id: ID!
+    classId: ID!
     className: String!
+    teacher: Teacher
+    students: [Student]
+    assignments: [Assignment]
   }
 
   type AuthTeacher {
@@ -50,18 +58,18 @@ const typeDefs = `
   type Mutation {
     loginTeacher(teacherEmail: String!, teacherPassword: String!): AuthTeacher
     addTeacher(teacherName: String!, teacherEmail: String!, teacherPassword: String!): AuthTeacher
-    editTeacher(id: ID!, teacherName: String!, teacherEmail: String!, teacherPassword: String!): Teacher
-    deleteTeacher(id: ID!): Teacher
+    editTeacher(teacherId: ID!, teacherName: String!, teacherEmail: String!, teacherPassword: String!): Teacher
+    deleteTeacher(teacherId: ID!): Teacher
     loginStudent(studentEmail: String!, studentPassword: String!): AuthStudent
     addStudent(studentName: String!, studentEmail: String!, studentPassword: String!): AuthStudent
-    editStudent(id: ID!, studentName: String!, studentEmail: String!, studentPassword: String!): Student
-    deleteStudent(id: ID!): Student
+    editStudent(studentId: ID!, studentName: String!, studentEmail: String!, studentPassword: String!): Student
+    deleteStudent(studentId: ID!): Student
     addAssignment(assignmentName: String!, assignmentDescription: String!, assignDate: String!, dueDate: String!): Assignment
-    editAssignment(id: ID!, assignmentName: String!, assignmentDescription: String!, assignDate: String!, dueDate: String!): Assignment
-    deleteAssignment(id: ID!): Assignment
+    editAssignment(assignmentId: ID!, assignmentName: String!, assignmentDescription: String!, assignDate: String!, dueDate: String!): Assignment
+    deleteAssignment(assignmentId: ID!): Assignment
     addClass(className: String!): Class
-    editClass(id: ID!, className: String!): Class
-    deleteClass(id: ID!): Class
+    editClass(classId: ID!, className: String!): Class
+    deleteClass(classId: ID!): Class
   }
 `;
 
