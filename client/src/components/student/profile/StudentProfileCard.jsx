@@ -5,6 +5,7 @@ import StudentEditProfileModal from "./StudentEditProfileModal";
 import StudentSignoutModal from "./StudentSignoutModal";
 
 const StudentProfileCard = ({ student }) => {
+  
   return (
     <div style={{ width: "75%", margin: "0 auto", marginTop: "20px" }}>
       <Card.Root>
@@ -27,7 +28,7 @@ const StudentProfileCard = ({ student }) => {
           </p>
         </Card.Body>
         <Card.Footer>
-          <StudentEditProfileModal />
+          <StudentEditProfileModal student={student}/>
           <StudentSignoutModal />
         </Card.Footer>
       </Card.Root>

@@ -87,7 +87,7 @@ const MenuLinks = ({ isOpen }) => {
         pt={[4, 4, 0, 0]}
       >
         <MenuItem to="/teacher/dashboard">
-          <Button colorPalette={"gray"}>Home</Button>
+          <Button colorPalette={"gray"}>Dashboard</Button>
         </MenuItem>
         <MenuItem to="/teacher/notifications">
           <Box position="relative">

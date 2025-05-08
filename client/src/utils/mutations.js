@@ -22,11 +22,11 @@ export const LOGIN_TEACHER = gql`
 `;
 
 export const EDIT_TEACHER = gql`
-  mutation editTeacher($id: ID!, $teacherName: String!, $teacherEmail: String!, $teacherPassword: String!) {
-    editTeacher(id: $id, teacherName: $teacherName, teacherEmail: $teacherEmail, teacherPassword: $teacherPassword) {
-      id
-      teacherEmail
+  mutation editTeacher($teacherName: String!, $teacherEmail: String!, $teacherBio: String!) {
+    editTeacher(teacherName: $teacherName, teacherEmail: $teacherEmail, teacherBio: $teacherBio) {
       teacherName
+      teacherEmail
+      teacherBio
     }
   }
 `;
@@ -63,11 +63,11 @@ export const LOGIN_STUDENT = gql`
 `;
 
 export const EDIT_STUDENT = gql`
-  mutation editStudent($id: ID!, $studentName: String!, $studentEmail: String!, $studentPassword: String!) {
-    editStudent(id: $id, studentName: $studentName, studentEmail: $studentEmail, studentPassword: $studentPassword) {
-      id
-      studentEmail
+  mutation editStudent($studentName: String!, $studentEmail: String!, $studentBio: String!) {
+    editStudent(studentName: $studentName, studentEmail: $studentEmail, studentBio: $studentBio) {
       studentName
+      studentEmail
+      studentBio
     }
   }
 `;

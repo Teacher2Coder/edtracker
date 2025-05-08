@@ -66,7 +66,7 @@ const typeDefs = `
   type Mutation {
     loginTeacher(teacherEmail: String!, teacherPassword: String!): AuthTeacher
     addTeacher(teacherName: String!, teacherEmail: String!, teacherPassword: String!): AuthTeacher
-    editTeacher(teacherId: ID!, teacherName: String!, teacherEmail: String!, teacherPassword: String!): Teacher
+    editTeacher(teacherName: String!, teacherEmail: String!, teacherBio: String!): Teacher
     deleteTeacher(teacherId: ID!): Teacher
     loginStudent(studentEmail: String!, studentPassword: String!): AuthStudent
     addStudent(studentName: String!, studentEmail: String!, studentPassword: String!): AuthStudent

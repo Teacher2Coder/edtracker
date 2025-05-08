@@ -259,9 +259,10 @@ const resolvers = {
     },
     editTeacher: async (
       _,
-      { id, teacherName, teacherEmail, teacherPassword }
+      { teacherName, teacherEmail, teacherBio },
+      context
     ) => {
-      const teacher = await Teacher.findOne({ where: { teacherId: id } });
+      const teacher = await Teacher.findOne({ where: { teacherEmail: context.user.teacherEmail } });
 
       if (!teacher) {
         throw new AuthenticationError("No teacher found with this ID");
@@ -269,7 +270,7 @@ const resolvers = {
 
       teacher.teacherName = teacherName;
       teacher.teacherEmail = teacherEmail;
-      teacher.teacherPassword = teacherPassword;
+      teacher.teacherBio = teacherBio;
 
       return await teacher.save();
     },
