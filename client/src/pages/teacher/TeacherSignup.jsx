@@ -13,6 +13,14 @@ import Auth from '../../utils/auth';
 
 const SignupTeacher = () => {
   
+  if (Auth.isStudent()) {
+    window.location.replace('/student/dashboard');
+  }
+
+  if (Auth.isTeacher()) {
+    window.location.replace('/teacher/dashboard');
+  }
+  
   const [formData, setFormData] = useState({
     teacherName: '',
     teacherEmail: '',

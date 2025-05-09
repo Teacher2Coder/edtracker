@@ -10,6 +10,14 @@ import Auth from '../../utils/auth'
 // Define SignupStudent function
 const SignupStudent = () => {
   
+  if (Auth.isStudent()) {
+    window.location.replace('/student/dashboard');
+  }
+
+  if (Auth.isTeacher()) {
+    window.location.replace('/teacher/dashboard');
+  }
+
   const [formData, setFormData] = useState({
     studentName: '',
     studentEmail: '',

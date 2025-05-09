@@ -8,6 +8,14 @@ import Auth from '../../utils/auth';
 
 const LoginStudent = () => {
   
+  if (Auth.isStudent()) {
+    window.location.replace('/student/dashboard');
+  }
+
+  if (Auth.isTeacher()) {
+    window.location.replace('/teacher/dashboard');
+  }
+
   const [formData, setFormData] = useState({
     studentEmail: '',
     studentPassword: ''
