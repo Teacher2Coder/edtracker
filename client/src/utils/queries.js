@@ -19,6 +19,31 @@ export const QUERY_TEACHER = gql`
     }
   }
 `;
+
+export const QUERY_TEACHER_NOTIFICATION_COUNT = gql`
+  query getTeacherNotifications {
+    getTeacherNotifications {
+      notifications {
+        notificationId
+      }
+    }
+  }
+`;
+
+export const QUERY_TEACHER_NOTIFICATIONS = gql`
+  query getTeacherNotifications {
+    getTeacherNotifications {
+      notifications {
+        subject
+        notificationType
+        notificationId
+        body
+        acknowledged
+      }
+    }
+  }
+`;
+
 export const QUERY_TEACHER_DASHBOARD = gql`
   query getTeacherDashBoard {
     getTeacherDashboard {
@@ -63,6 +88,30 @@ export const QUERY_STUDENT = gql`
       id
       studentEmail
       studentName
+    }
+  }
+`;
+
+export const QUERY_STUDENT_NOTIFICATION_COUNT = gql`
+  query getStudentNotifications {
+    getStudentNotifications {
+      notifications {
+        notificationId
+      }
+    }
+  }
+`;
+
+export const QUERY_STUDENT_NOTIFICATIONS = gql`
+  query getStudentNotifications {
+    getStudentNotifications {
+      notifications {
+        subject
+        notificationType
+        notificationId
+        body
+        acknowledged
+      }
     }
   }
 `;

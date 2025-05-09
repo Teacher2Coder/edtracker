@@ -1,4 +1,4 @@
-const { Teacher, Student, Class, Assignment } = require("../models");
+const { Teacher, Student, Class, Assignment, TeacherNotification, StudentNotification } = require("../models");
 const {
   signTokenTeacher,
   signTokenStudent,
@@ -39,6 +39,17 @@ const resolvers = {
           },
         ],
       });
+    },
+    getTeacherNotifications: async (_, _args, context) => {
+      return await Teacher.findOne({
+        where: { teacherEmail: context.user.teacherEmail },
+        include: [
+          {
+            model: TeacherNotification,
+            as: 'notifications'
+          }
+        ]
+      })
     },
     getTeacherDashboard: async (_parent, _args, context) => {
       if (context.user.teacherEmail) {
@@ -116,6 +127,17 @@ const resolvers = {
           },
         ],
       });
+    },
+    getStudentNotifications: async (_, _args, context) => {
+      return await Student.findOne({
+        where: { studentEmail: context.user.studentEmail },
+        include: [
+          {
+            model: StudentNotification,
+            as: 'notifications'
+          }
+        ]
+      })
     },
     getStudentDashboard: async (_parent, _args, context) => {
       if (context.user.studentEmail) {

@@ -14,8 +14,8 @@ import {
 // Import components
 import Logo from "../../Logo";
 
-// Mock notification count for demonstration purposes
-const notifications = 3;
+import { useQuery } from "@apollo/client";
+import { QUERY_STUDENT_NOTIFICATION_COUNT } from "../../../utils/queries";
 
 const NavBar = (props) => {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -75,6 +75,11 @@ const MenuItem = ({ children, isLast, to = "/", ...rest }) => {
 };
 
 const MenuLinks = ({ isOpen }) => {
+  const { loading, data } = useQuery(QUERY_STUDENT_NOTIFICATION_COUNT);
+
+  const studentData = data?.getStudentNotifications || {};
+  const notifications = studentData.notifications.length || [];
+
   return (
     <Box
       display={{ base: isOpen ? "block" : "none", md: "block" }}
@@ -94,11 +99,13 @@ const MenuLinks = ({ isOpen }) => {
         <MenuItem to="/student/notifications">
           <Box position="relative">
             <Button colorPalette={"gray"}>Notifications</Button>
-            <Float>
-              <Circle size="5" bg="red" color="white">
-                {notifications}
-              </Circle>
-            </Float>
+            {notifications.length > 0 ? (
+              <Float>
+                <Circle size="5" bg="red" color="white">
+                  {notifications.length}
+                </Circle>
+              </Float>
+            ) : null}
           </Box>
         </MenuItem>
         <MenuItem to="/student/me" isLast>

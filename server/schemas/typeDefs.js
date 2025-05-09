@@ -6,6 +6,16 @@ const typeDefs = `
     teacherPassword: String!
     teacherBio: String
     taughtClasses: [Class]
+    notifications: [TeacherNotification]
+  }
+  
+  type TeacherNotification {
+    notificationId: ID!
+    teacherId: ID!
+    notificationType: String!
+    subject: String!
+    body: String!
+    acknowledged: Boolean!
   }
   
   type Student {
@@ -16,6 +26,16 @@ const typeDefs = `
     studentBio: String
     classes: [Class]
     assignments: [Assignment]
+    notifications: [StudentNotification]
+  }
+
+  type StudentNotification {
+    notificationId: ID!
+    studentId: ID!
+    notificationType: String!
+    subject: String!
+    body: String!
+    acknowledged: Boolean!
   }
 
   type Assignment {
@@ -51,10 +71,12 @@ const typeDefs = `
   type Query {
     getAllTeachers: [Teacher]
     getTeacher(id: ID!): Teacher
+    getTeacherNotifications: Teacher
     getTeacherDashboard: Teacher
     getTeacherMeProfile: Teacher
     getAllStudents: [Student]
     getStudent(id: ID!): Student
+    getStudentNotifications: Student
     getStudentDashboard: Student
     getStudentMeProfile: Student
     getAllAssignments: [Assignment]

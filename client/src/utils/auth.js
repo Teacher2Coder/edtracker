@@ -7,22 +7,30 @@ class AuthService {
   }
 
   isTeacher() {
-    const token = this.getToken();
-    const decoded = jwtDecode(token);
+    if (this.loggedIn()) {
+      const token = this.getToken();
+      const decoded = jwtDecode(token);
 
-    if (decoded.data.teacherEmail) {
-      return true;
+      if (decoded.data.teacherEmail) {
+        return true;
+      } else {
+        return false;
+      }
     } else {
       return false;
     }
   }
 
   isStudent() {
-    const token = this.getToken();
-    const decoded = jwtDecode(token);
+    if (this.loggedIn()) {
+      const token = this.getToken();
+      const decoded = jwtDecode(token);
 
-    if (decoded.data.studentEmail) {
-      return true;
+      if (decoded.data.studentEmail) {
+        return true;
+      } else {
+        return false;
+      }
     } else {
       return false;
     }

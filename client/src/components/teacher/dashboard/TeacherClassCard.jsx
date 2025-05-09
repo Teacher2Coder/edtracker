@@ -26,7 +26,7 @@ const ClassCardTeacher = ({ cls }) => {
           <Table.Body>
             {/* Linear time */}
             {students.map((student) => (
-              <Table.Row key={student.id}>
+              <Table.Row key={student.studentName}>
                 <Table.Cell>{student.studentName}</Table.Cell>
                 <Table.Cell textAlign="center">0</Table.Cell>
                 <Table.Cell textAlign="center">0</Table.Cell>

@@ -1,6 +1,8 @@
 // Import all models
 const Teacher = require('./Teacher');
+const TeacherNotification = require('./TeacherNotification');
 const Student = require('./Student');
+const StudentNotification = require('./StudentNotification');
 const Assignment = require('./Assignment');
 const Class = require('./Class');
 const Enrollment = require('./Enrollment');
@@ -15,6 +17,18 @@ Teacher.hasMany(Class, {
 Class.belongsTo(Teacher, { 
   foreignKey: 'teacherId',
   as: 'teacher',
+});
+
+//Teacher and Notification association
+Teacher.hasMany(TeacherNotification, {
+  foreignKey: 'teacherId',
+  as: 'notifications',
+  onDelete: 'CASCADE',
+  onUpdate: 'CASCADE'
+});
+TeacherNotification.belongsTo(Teacher, {
+  foreignKey: 'teacherId',
+  as: 'teacher'
 });
 
 // Class and Student association
@@ -56,6 +70,18 @@ Assignment.belongsToMany(Student, {
   as: 'students',
 });
 
+// Student and notification association
+Student.hasMany(StudentNotification, {
+  foreignKey: 'studentId',
+  as: 'notifications',
+  onDelete: 'CASCADE',
+  onUpdate: 'CASCADE'
+});
+StudentNotification.belongsTo(Student, {
+  foreignKey: 'studentId',
+  as: 'student'
+});
+
 
 // Export all models
 module.exports = {
@@ -65,4 +91,6 @@ module.exports = {
   Class,
   Enrollment,
   Submission,
+  TeacherNotification,
+  StudentNotification
 };
