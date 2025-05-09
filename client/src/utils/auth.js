@@ -6,6 +6,28 @@ class AuthService {
     return jwtDecode(this.getToken())
   }
 
+  isTeacher() {
+    const token = this.getToken();
+    const decoded = jwtDecode(token);
+
+    if (decoded.data.teacherEmail) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  isStudent() {
+    const token = this.getToken();
+    const decoded = jwtDecode(token);
+
+    if (decoded.data.studentEmail) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   loggedIn() {
     const token = this.getToken();
 

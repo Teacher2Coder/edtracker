@@ -30,6 +30,10 @@ const StudentNotifications = () => {
   if (!Auth.loggedIn()) {
     return <NotLoggedIn />;
   }
+
+  if (Auth.isTeacher()) {
+    location.replace('/teacher/notifications');
+  }
   
   return (
     <div>

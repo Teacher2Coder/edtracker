@@ -7,6 +7,10 @@ const TeacherClassView = () => {
   if (!Auth.loggedIn()) {
     return <NotLoggedIn />;
   }
+
+  if (Auth.isTeacher()) {
+    location.replace('/teacher/dashboard');
+  }
   
   return (
     <div>

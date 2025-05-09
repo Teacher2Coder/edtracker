@@ -17,9 +17,15 @@ const DashboardTeacher = () => {
     return <NotLoggedIn />;
   }
 
+  if (Auth.isStudent()) {
+    location.replace("/student/dashboard");
+  }
+
   if (loading) {
     return <h2>Loading...</h2>;
   }
+
+  Auth.isTeacher();
 
   return (
     <div>

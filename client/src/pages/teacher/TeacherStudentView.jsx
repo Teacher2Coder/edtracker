@@ -7,6 +7,10 @@ const TeacherStudentView = () => {
   if (!Auth.loggedIn()) {
     return <NotLoggedIn />;
   }
+
+  if (Auth.isStudent()) {
+    location.replace("/student/dashboard");
+  }
   
   return (
     <div>

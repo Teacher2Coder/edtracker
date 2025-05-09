@@ -19,6 +19,10 @@ const DashboardStudent = () => {
     return <NotLoggedIn />;
   }
 
+  if (Auth.isTeacher()) {
+    location.replace('/teacher/dashboard');
+  }
+
   if (loading) {
     return (
       <h2>Loading...</h2>

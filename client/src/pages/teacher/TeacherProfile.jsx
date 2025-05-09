@@ -20,6 +20,10 @@ const TeacherProfile = () => {
     return <NotLoggedIn />;
   }
 
+  if (Auth.isStudent()) {
+    location.replace("/student/me");
+  }
+
   if (loading) {
     return (
       <h2>Loading...</h2>
