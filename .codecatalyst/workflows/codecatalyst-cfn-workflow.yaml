@@ -22,7 +22,7 @@ Actions:
     Environment:
       Name: codecatalyst-cfn-environment
       Connections:
-        - Name: ethanowens
+        - Name: 442042512940
           Role: codecatalyst-build-role
     Inputs:
       Sources:
@@ -30,7 +30,7 @@ Actions:
     Configuration: 
       Steps:
         - Run: . ./setup-sam.sh
-        - Run: sam package --template-file sam-template.yml --s3-bucket codecatalyst-cfn-s3-bucket-edutracker --output-template-file sam-template-packaged.yml --region us-west-2
+        - Run: sam package --template-file sam-template.yml --s3-bucket codecatalyst-cfn-s3-bucket --output-template-file sam-template-packaged.yml --region us-west-2
     Outputs:
       Artifacts:
         - Name: buildArtifact
@@ -43,7 +43,7 @@ Actions:
     Environment:
       Name: codecatalyst-cfn-environment
       Connections:
-        - Name: ethanowens
+        - Name: 442042512940
           Role: codecatalyst-deploy-role
     Inputs:
       Artifacts:
@@ -52,6 +52,6 @@ Actions:
     Configuration:
       name: codecatalyst-cfn-stack
       region: us-west-2
-      role-arn: arn:aws:iam::442042512940:role/codecatalyst-stack-role
+      role-arn: arn:aws:iam::111122223333:role/StackRole
       template: ./sam-template-packaged.yml
       capabilities: CAPABILITY_IAM,CAPABILITY_AUTO_EXPAND
