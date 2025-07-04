@@ -9,3 +9,37 @@ Description: >
 Globals:
   Function:
     Timeout: 3
+
+Resources:
+  EdTrackerApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: prod
+
+  EdTrackerFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: server/lambda.handler
+      Runtime: nodejs18.x
+      CodeUri: .
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /{proxy+}
+            Method: ANY
+      Environment:
+        Variables:
+          NODE_ENV: production
+          # Add your DB connection env vars here
+
+  Uncomment and configure if you want to provision an RDS instance for PostgreSQL
+  EdTrackerDB:
+    Type: AWS::RDS::DBInstance
+    Properties:
+      DBInstanceClass: db.t3.micro
+      Engine: postgres
+      MasterUsername: ethanowens
+      MasterUserPassword: password12345
+      AllocatedStorage: 20
+
