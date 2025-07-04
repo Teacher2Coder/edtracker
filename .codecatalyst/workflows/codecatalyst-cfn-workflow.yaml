@@ -11,16 +11,16 @@ Actions:
     Inputs:
       Sources:
         - WorkflowSource
-    Outputs:
-      Reports:
-        CoverageReport:
-          Format: CLOVERXML
-          IncludePaths:
-            - "coverage/*"
-        TestReport:
-          Format: JUNITXML
-          IncludePaths:
-            - junit.xml
+    # Outputs:
+    #   Reports:
+    #     CoverageReport:
+    #       Format: CLOVERXML
+    #       IncludePaths:
+    #         - "coverage/*"
+    #     TestReport:
+    #       Format: JUNITXML
+    #       IncludePaths:
+    #         - junit.xml
     Configuration:
       Steps:
         - Run: npm install
