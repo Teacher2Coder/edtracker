@@ -38,3 +38,5 @@ Resources:
       MasterUsername: ethanowens
       MasterUserPassword: password12345
       AllocatedStorage: 20
+  EdTrackerBucket:
+    Type: AWS::S3::Bucket
