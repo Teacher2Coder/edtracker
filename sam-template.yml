@@ -5,7 +5,6 @@ Description: >
 
   Sample SAM Template for serverless-api
   
-# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
   Function:
     Timeout: 3
@@ -31,9 +30,6 @@ Resources:
       Environment:
         Variables:
           NODE_ENV: production
-          # Add your DB connection env vars here
-
-  Uncomment and configure if you want to provision an RDS instance for PostgreSQL
   EdTrackerDB:
     Type: AWS::RDS::DBInstance
     Properties:
@@ -42,4 +38,3 @@ Resources:
       MasterUsername: ethanowens
       MasterUserPassword: password12345
       AllocatedStorage: 20
-
