@@ -5,9 +5,10 @@ import { expressMiddleware } from '@apollo/server/express4';
 import path from 'path';
 
 // Import utilities
-import { sequelize, testDbConnection } from './config/connection.js';
+import { sequelize, testDbConnection, checkDatabaseEmpty } from './config/connection.js';
 import { typeDefs, resolvers } from './schemas/index.js';
 import auth from './utils/auth.js';
+import handleSeedDatabase from './config/seeds.js';
 
 // Define key variables
 const app = express();
@@ -41,11 +42,37 @@ const startServer = async () => {
   }
 
   // Test the database connection
-  const goodConnection = testDbConnection();
+  const goodConnection = await testDbConnection();
 
-  // If the connection is good, start the server
+  // If the connection is good, check database status and start the server
   if (goodConnection) {
-    sequelize.sync({ force: false }).then(() => {
+    // Check if database is empty
+    const dbStatus = await checkDatabaseEmpty();
+    
+    if (dbStatus.isEmpty === true) {
+      if (dbStatus.tableCount === 0) {
+        console.log('🔄 Database is empty - will create tables on sync');
+      } else {
+        console.log('🔄 Database has tables but no data - running seeds...');
+        await handleSeedDatabase();
+        console.log('✅ Seeding completed');
+      }
+    } else if (dbStatus.isEmpty === false) {
+      console.log('✅ Database is populated and ready');
+    }
+
+    sequelize.sync({ force: false }).then(async () => {
+      // If we just created tables, check again and seed if needed
+      if (dbStatus.tableCount === 0) {
+        console.log('🔄 Tables created, checking if seeding is needed...');
+        const newDbStatus = await checkDatabaseEmpty();
+        if (newDbStatus.isEmpty === true && newDbStatus.tableCount > 0) {
+          console.log('🔄 Running seeds after table creation...');
+          await handleSeedDatabase();
+          console.log('✅ Seeding completed after table creation');
+        }
+      }
+      
       app.listen(PORT, () => console.log(`Now listening at http://localhost:${PORT}`));
     }).catch((err) => {
       console.error('Error syncing database:', err);

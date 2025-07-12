@@ -1,6 +1,6 @@
-const { DataTypes, Model } = require('sequelize');
-const { sequelize } = require('../config/connection');
-const bcrypt = require('bcrypt');
+import { DataTypes, Model } from 'sequelize';
+import { sequelize } from '../config/connection.js';
+import bcrypt from 'bcrypt';
 
 class Teacher extends Model {
   checkPassword(loginPw) {
@@ -52,4 +52,4 @@ Teacher.init(
   }
 );
 
-module.exports = Teacher;
+export default Teacher;

@@ -1,5 +1,5 @@
-const { DataTypes, Model } = require('sequelize');
-const { sequelize } = require('../config/connection');
+import { DataTypes, Model } from 'sequelize';
+import { sequelize } from '../config/connection.js';
 
 class Submission extends Model {}
 
@@ -25,4 +25,4 @@ Submission.init(
   }
 );
 
-module.exports = Submission;
+export default Submission;

@@ -204,5 +204,7 @@ const handleSeedDatabase = async () => {
   }
 };
 
-// Execute the seed function
-handleSeedDatabase();
+// Export the seed function
+export default handleSeedDatabase;
+
+

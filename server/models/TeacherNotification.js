@@ -1,5 +1,5 @@
-const { DataTypes, Model } = require('sequelize');
-const { sequelize } = require('../config/connection');
+import { DataTypes, Model } from 'sequelize';
+import { sequelize } from '../config/connection.js';
 
 class TeacherNotification extends Model {};
 
@@ -36,4 +36,4 @@ TeacherNotification.init(
   }
 );
 
-module.exports = TeacherNotification;
+export default TeacherNotification;

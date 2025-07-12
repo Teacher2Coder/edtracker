@@ -1,9 +1,11 @@
-const { Teacher, Student, Class, Assignment, TeacherNotification, StudentNotification } = require("../models");
+import { Teacher, Student, Class, Assignment, TeacherNotification, StudentNotification } from "../models/index.js";
+import auth from "../utils/auth.js";
+
 const {
   signTokenTeacher,
   signTokenStudent,
   AuthenticationError,
-} = require("../utils/auth");
+} = auth;
 
 const resolvers = {
   Query: {
@@ -430,4 +432,4 @@ const resolvers = {
   },
 };
 
-module.exports = resolvers;
+export default resolvers;

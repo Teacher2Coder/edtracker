@@ -1,12 +1,12 @@
 // Import all models
-const Teacher = require('./Teacher');
-const TeacherNotification = require('./TeacherNotification');
-const Student = require('./Student');
-const StudentNotification = require('./StudentNotification');
-const Assignment = require('./Assignment');
-const Class = require('./Class');
-const Enrollment = require('./Enrollment');
-const Submission = require('./Submission');
+import Teacher from './Teacher.js';
+import TeacherNotification from './TeacherNotification.js';
+import Student from './Student.js';
+import StudentNotification from './StudentNotification.js';
+import Assignment from './Assignment.js';
+import Class from './Class.js';
+import Enrollment from './Enrollment.js';
+import Submission from './Submission.js';
 
 // Teacher and Class association
 Teacher.hasMany(Class, { 
@@ -84,7 +84,7 @@ StudentNotification.belongsTo(Student, {
 
 
 // Export all models
-module.exports = {
+export {
   Teacher,
   Student,
   Assignment,

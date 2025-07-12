@@ -1,6 +1,6 @@
-const {  DataTypes, Model } = require('sequelize');
-const { sequelize } = require('../config/connection');
-const moment = require('moment');
+import { DataTypes, Model } from 'sequelize';
+import { sequelize } from '../config/connection.js';
+import moment from 'moment';
 
 class Assignment extends Model {}
 
@@ -52,4 +52,4 @@ Assignment.init(
   }
 );
 
-module.exports = Assignment;
+export default Assignment;
