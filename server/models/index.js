@@ -1,3 +1,5 @@
+import { sequelize } from '../config/connection.js';
+
 // Import all models
 import Teacher from './Teacher.js';
 import TeacherNotification from './TeacherNotification.js';
@@ -82,6 +84,7 @@ StudentNotification.belongsTo(Student, {
   as: 'student'
 });
 
+await sequelize.sync();
 
 // Export all models
 export {
