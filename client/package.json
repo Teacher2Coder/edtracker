@@ -1,6 +1,7 @@
 {
   "name": "client",
   "version": "1.0.0",
+  "type": "module",
   "description": "Client side of EdTracker App",
   "main": "main.jsx",
   "scripts": {

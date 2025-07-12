@@ -1,6 +1,7 @@
 {
   "name": "edtracker",
   "version": "1.0.0",
+  "type": "module",
   "description": "Allows teachers and students to manage tasks and assignments",
   "main": "server/server.js",
   "scripts": {
