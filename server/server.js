@@ -44,14 +44,44 @@ const startServer = async () => {
   // Test the database connection
   const goodConnection = await testDbConnection();
 
-  // If the connection is good, check database status and start the server
+  // If the connection is good, start the server first, then handle database operations
   if (goodConnection) {
+    // Sync database and start server
+    sequelize.sync({ force: false }).then(async () => {
+      console.log('✅ Database synced successfully');
+      
+      // Start the server immediately
+      app.listen(PORT, () => {
+        console.log(`Now listening at http://localhost:${PORT}`);
+        
+        // Handle database seeding asynchronously after server starts
+        handleDatabaseSetup();
+      });
+    }).catch((err) => {
+      console.error('Error syncing database:', err);
+      process.exit(1);
+    });
+  } else {
+    console.error('Database connection failed. Server not started.');
+    process.exit(1);
+  }
+}
+
+// Async function to handle database setup without blocking server startup
+async function handleDatabaseSetup() {
+  try {
+    // Skip seeding in production if environment variable is set
+    if (process.env.SKIP_SEEDING === 'true') {
+      console.log('🚫 Skipping database seeding (SKIP_SEEDING=true)');
+      return;
+    }
+
     // Check if database is empty
     const dbStatus = await checkDatabaseEmpty();
     
     if (dbStatus.isEmpty === true) {
       if (dbStatus.tableCount === 0) {
-        console.log('🔄 Database is empty - will create tables on sync');
+        console.log('🔄 Database is empty - tables will be created on sync');
       } else {
         console.log('🔄 Database has tables but no data - running seeds...');
         await handleSeedDatabase();
@@ -60,26 +90,9 @@ const startServer = async () => {
     } else if (dbStatus.isEmpty === false) {
       console.log('✅ Database is populated and ready');
     }
-
-    sequelize.sync({ force: false }).then(async () => {
-      // If we just created tables, check again and seed if needed
-      if (dbStatus.tableCount === 0) {
-        console.log('🔄 Tables created, checking if seeding is needed...');
-        const newDbStatus = await checkDatabaseEmpty();
-        if (newDbStatus.isEmpty === true && newDbStatus.tableCount > 0) {
-          console.log('🔄 Running seeds after table creation...');
-          await handleSeedDatabase();
-          console.log('✅ Seeding completed after table creation');
-        }
-      }
-      
-      app.listen(PORT, () => console.log(`Now listening at http://localhost:${PORT}`));
-    }).catch((err) => {
-      console.error('Error syncing database:', err);
-    });
-  } else {
-    console.error('Database connection failed. Server not started.');
-    process.exit(1);
+  } catch (error) {
+    console.error('Error during database setup:', error);
+    // Don't exit the process, just log the error
   }
 }
 

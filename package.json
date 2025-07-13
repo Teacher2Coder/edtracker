@@ -5,13 +5,13 @@
   "description": "Allows teachers and students to manage tasks and assignments",
   "main": "server/server.js",
   "scripts": {
-    "start": "npm run app-build && node server/server.js",
+    "start": "node server/server.js",
     "watch": "cd server && npm run watch",
     "dev": "concurrently \"cd server && npm run watch\" \"cd client && npm run dev\"",
     "install": "cd server && npm i && cd ../client && npm i",
     "seed": "cd server && npm run seed",
     "build": "cd client && npm run build",
-    "app-build": "npm install && npm run build"
+    "postinstall": "if [ \"$NODE_ENV\" = \"production\" ]; then npm run build; fi"
   },
   "repository": {
     "type": "git",
