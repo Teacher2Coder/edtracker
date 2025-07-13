@@ -10,7 +10,9 @@
     "dev": "concurrently \"cd server && npm run watch\" \"cd client && npm run dev\"",
     "install-all": "cd server && npm i && cd ../client && npm i",
     "seed": "cd server && npm run seed",
-    "build": "cd client && npm run build"
+    "build": "cd client && npm run build",
+    "heroku-prebuild": "cd server && npm install --production && cd ../client && npm install",
+    "heroku-postbuild": "cd client && npm run build"
   },
   "repository": {
     "type": "git",
