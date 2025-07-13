@@ -21,14 +21,20 @@ const sequelize = process.env.DB_URL
 // Function to test the database connection
 async function testDbConnection() {
   try {
+    console.log('Testing database connection...');
+    console.log(process.env.DB_NAME);
+    console.log(process.env.DB_USER);
+    console.log(process.env.DB_PASSWORD);
+    console.log(process.env.DB_URL);
+    
     await sequelize.authenticate();
     console.log(
-      `✅ Connection to database [${process.env.DB_NAME}] on host [${process.env.DB_HOST || 'localhost'}] successful.`
+      `✅ Connection to database [${process.env.DB_NAME}] on host [${process.env.DB_URL || 'localhost'}] successful.`
     );
     return true;
   } catch (error) {
     console.error(
-      `❌ Unable to connect to the database [${process.env.DB_NAME}] on host [${process.env.DB_HOST || 'localhost'}]:`,
+      `❌ Unable to connect to the database [${process.env.DB_NAME}] on host [${process.env.DB_URL || 'localhost'}]:`,
       error
     );
     return false;
