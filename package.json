@@ -8,10 +8,9 @@
     "start": "node server/server.js",
     "watch": "cd server && npm run watch",
     "dev": "concurrently \"cd server && npm run watch\" \"cd client && npm run dev\"",
-    "install": "cd server && npm i && cd ../client && npm i",
+    "install-all": "cd server && npm i && cd ../client && npm i",
     "seed": "cd server && npm run seed",
-    "build": "cd client && npm run build",
-    "postinstall": "if [ \"$NODE_ENV\" = \"production\" ]; then npm run build; fi"
+    "build": "cd client && npm run build"
   },
   "repository": {
     "type": "git",
