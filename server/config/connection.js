@@ -4,15 +4,16 @@ import dotenv from 'dotenv';
 
 dotenv.config({ path: '../.env' });
 
-// Start sequelize session and pass in values from .env file
+// Start sequelize session and pass in values from .env file or AWS environment
 const sequelize = process.env.DB_URL
   ? new Sequelize(process.env.DB_URL)
   : new Sequelize(
-    process.env.DB_NAME,
-    process.env.DB_USER,
-    process.env.DB_PASSWORD,
+    process.env.DB_NAME || process.env.RDS_DB_NAME,
+    process.env.DB_USER || process.env.RDS_USERNAME,
+    process.env.DB_PASSWORD || process.env.RDS_PASSWORD,
     {
-      host: 'localhost',
+      host: process.env.DB_HOST || process.env.RDS_HOSTNAME || 'localhost',
+      port: process.env.DB_PORT || process.env.RDS_PORT || 5432,
       dialect: 'postgres',
       logging: false,
     }
