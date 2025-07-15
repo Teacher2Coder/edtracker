@@ -12,7 +12,7 @@
     "seed": "cd server && npm run seed",
     "build": "cd client && npm run build",
     "deploy:prep": "node deploy.js",
-    "postinstall": "npm run install-all && npm run build"
+    "postinstall": "cd server && npm install && cd ../client && npm install && cd .. && npm run build"
   },
   "repository": {
     "type": "git",
