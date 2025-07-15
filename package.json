@@ -11,7 +11,8 @@
     "install-all": "cd server && npm i && cd ../client && npm i",
     "seed": "cd server && npm run seed",
     "build": "cd client && npm run build",
-    "postinstall": "cd server && npm install --omit=dev"
+    "deploy:prep": "node deploy.js",
+    "postinstall": "npm run install-all && npm run build"
   },
   "repository": {
     "type": "git",
