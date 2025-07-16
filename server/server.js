@@ -38,6 +38,11 @@ const startServer = async () => {
     })
   );
 
+  // Add a simple health check endpoint
+  app.get('/health', (req, res) => {
+    res.status(200).json({ status: 'ok', message: 'Server is running' });
+  });
+
   if (process.env.NODE_ENV === "production") {
     app.use(express.static(path.join(__dirname, "../client/dist")));
 
