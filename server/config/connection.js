@@ -6,7 +6,16 @@ dotenv.config({ path: '../.env' });
 
 // Start sequelize session and pass in values from .env file or AWS environment
 const sequelize = process.env.DB_URL
-  ? new Sequelize(process.env.DB_URL)
+  ? new Sequelize(process.env.DB_URL, {
+      dialect: 'postgres',
+      dialectOptions: {
+        ssl: {
+          require: true,
+          rejectUnauthorized: false // For AWS RDS
+        }
+      },
+      logging: false,
+    })
   : new Sequelize(
     process.env.DB_NAME || process.env.RDS_DB_NAME,
     process.env.DB_USER || process.env.RDS_USERNAME,
@@ -15,6 +24,12 @@ const sequelize = process.env.DB_URL
       host: process.env.DB_HOST || process.env.RDS_HOSTNAME || 'localhost',
       port: process.env.DB_PORT || process.env.RDS_PORT || 5432,
       dialect: 'postgres',
+      dialectOptions: {
+        ssl: process.env.NODE_ENV === 'production' ? {
+          require: true,
+          rejectUnauthorized: false // For AWS RDS
+        } : false
+      },
       logging: false,
     }
   );
