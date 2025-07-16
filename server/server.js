@@ -51,46 +51,38 @@ const startServer = async () => {
     });
   }
 
-  // Test the database connection
-  const goodConnection = await testDbConnection();
+  // Always start the server first, then handle database operations
+  app.listen(PORT, () => {
+    console.log(`Now listening at http://localhost:${PORT}`);
+    console.log(`GraphQL endpoint: http://localhost:${PORT}/graphql`);
+    
+    // Handle database operations asynchronously after server starts
+    handleDatabaseOperations();
+  });
 
-  // If the connection is good, start the server first, then handle database operations
-  if (goodConnection) {
-    // Sync database and start server
-    sequelize.sync({ force: false }).then(async () => {
-      console.log('✅ Database synced successfully');
-      
-      // Start the server immediately
-      app.listen(PORT, () => {
-        console.log(`Now listening at http://localhost:${PORT}`);
-        console.log(`GraphQL endpoint: http://localhost:${PORT}/graphql`);
-        
-        // Handle database seeding asynchronously after server starts
-        handleDatabaseSetup();
-      });
-    }).catch((err) => {
-      console.error('Error syncing database:', err);
-      // Start server anyway in production to avoid deployment failure
-      if (process.env.NODE_ENV === 'production') {
-        console.log('⚠️  Starting server despite database sync error in production');
-        app.listen(PORT, () => {
-          console.log(`Now listening at http://localhost:${PORT} (database sync failed)`);
-        });
+  async function handleDatabaseOperations() {
+    try {
+      // Test the database connection
+      const goodConnection = await testDbConnection();
+
+      if (goodConnection) {
+        try {
+          // Sync database
+          await sequelize.sync({ force: false });
+          console.log('✅ Database synced successfully');
+          
+          // Handle database seeding asynchronously
+          await handleDatabaseSetup();
+        } catch (syncError) {
+          console.error('❌ Error syncing database:', syncError.message);
+          console.log('⚠️  Server running without database sync');
+        }
       } else {
-        process.exit(1);
+        console.log('⚠️  Server running without database connection');
       }
-    });
-  } else {
-    console.error('Database connection failed.');
-    // In production, start server anyway to avoid deployment failure
-    if (process.env.NODE_ENV === 'production') {
-      console.log('⚠️  Starting server despite database connection failure in production');
-      app.listen(PORT, () => {
-        console.log(`Now listening at http://localhost:${PORT} (database connection failed)`);
-      });
-    } else {
-      console.error('Server not started due to database connection failure.');
-      process.exit(1);
+    } catch (error) {
+      console.error('❌ Database operation error:', error.message);
+      console.log('⚠️  Server running despite database errors');
     }
   }
 }
