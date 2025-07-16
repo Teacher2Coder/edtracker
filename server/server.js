@@ -11,32 +11,32 @@ const __dirname = path.dirname(__filename);
 
 // Import utilities
 import { sequelize, testDbConnection, checkDatabaseEmpty } from './config/connection.js';
-import { typeDefs, resolvers } from './schemas/index.js';
-import auth from './utils/auth.js';
+// import { typeDefs, resolvers } from './schemas/index.js';
+// import auth from './utils/auth.js';
 import handleSeedDatabase from './config/seeds.js';
 
 // Define key variables
 const app = express();
 const PORT = process.env.PORT || 3001;
-const authMiddleware = auth.authMiddleware;
+// const authMiddleware = auth.authMiddleware;
 
-// Instantiate the Apollo server
-const server = new ApolloServer({
-  typeDefs,
-  resolvers,
-});
+// Temporarily disable Apollo Server for testing
+// const server = new ApolloServer({
+//   typeDefs,
+//   resolvers,
+// });
 
 // Define StartServer function
 const startServer = async () => {
-  await server.start();
+  // await server.start();
   app.use(express.json());
   app.use(express.urlencoded({ extended: false }));
-  app.use(
-    '/graphql', 
-    expressMiddleware(server, {
-      context: authMiddleware
-    })
-  );
+  // app.use(
+  //   '/graphql', 
+  //   expressMiddleware(server, {
+  //     context: authMiddleware
+  //   })
+  // );
 
   // Add a simple health check endpoint
   app.get('/health', (req, res) => {
@@ -71,8 +71,8 @@ const startServer = async () => {
           await sequelize.sync({ force: false });
           console.log('✅ Database synced successfully');
           
-          // Handle database seeding asynchronously
-          await handleDatabaseSetup();
+                     // Handle database seeding asynchronously
+           // await handleDatabaseSetup(); // Temporarily disabled
         } catch (syncError) {
           console.error('❌ Error syncing database:', syncError.message);
           console.log('⚠️  Server running without database sync');
